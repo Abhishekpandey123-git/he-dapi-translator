@@ -1,0 +1,24 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+dist/
+mlruns/
+# Data & artefacts (GB-scale, never push to GitHub)
+data/raw/
+data/processed/
+data/examples/*.tiff
+resources/papers/pdfs/
+resources/models/checkpoints/
+.tmp_kaggle*/
+*.pt
+*.h5
+*.hdf5
+*.ckpt
+# Runtime logs & pid files
+logs/*.log
+logs/*.pid
+logs/*.flag
+*.flag
+nohup.out

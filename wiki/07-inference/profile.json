@@ -1,0 +1,261 @@
+{
+  "history": [
+    {
+      "ts": 1789830486.1240404,
+      "label": "infer:he2dapi:start",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2425.3,
+        "used_mb": 1382.3,
+        "used_pct": 36.3,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 929.8,
+        "used_gb": 96.3
+      }
+    },
+    {
+      "ts": 1789830486.195904,
+      "label": "infer:he2dapi:patch_end",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2416.8,
+        "used_mb": 1390.9,
+        "used_pct": 36.5,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 929.8,
+        "used_gb": 96.3
+      }
+    },
+    {
+      "ts": 1789830486.2409468,
+      "label": "infer:he2dapi:end",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2416.8,
+        "used_mb": 1390.9,
+        "used_pct": 36.5,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 929.8,
+        "used_gb": 96.3
+      }
+    },
+    {
+      "ts": 1789830486.241945,
+      "label": "infer:he2dapi:start",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2416.8,
+        "used_mb": 1390.9,
+        "used_pct": 36.5,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 929.8,
+        "used_gb": 96.3
+      }
+    },
+    {
+      "ts": 1789830486.3144574,
+      "label": "infer:he2dapi:tiled_end",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2416.0,
+        "used_mb": 1391.6,
+        "used_pct": 36.5,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 929.8,
+        "used_gb": 96.3
+      }
+    },
+    {
+      "ts": 1789830486.3913772,
+      "label": "infer:he2dapi:end",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2410.4,
+        "used_mb": 1397.3,
+        "used_pct": 36.7,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 929.8,
+        "used_gb": 96.3
+      }
+    },
+    {
+      "ts": 1790429298.660295,
+      "label": "infer:he2dapi:start",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2539.3,
+        "used_mb": 1268.3,
+        "used_pct": 33.3,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1021.8
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 928.5,
+        "used_gb": 97.6
+      }
+    },
+    {
+      "ts": 1790429305.2424314,
+      "label": "infer:he2dapi:patch_end",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2189.5,
+        "used_mb": 1618.1,
+        "used_pct": 42.5,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1021.8
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 928.5,
+        "used_gb": 97.6
+      }
+    },
+    {
+      "ts": 1790429305.2872214,
+      "label": "infer:he2dapi:end",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2189.6,
+        "used_mb": 1618.0,
+        "used_pct": 42.5,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1021.8
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 928.5,
+        "used_gb": 97.6
+      }
+    },
+    {
+      "ts": 1790514831.956396,
+      "label": "infer:he2dapi:start",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 1400.9,
+        "used_mb": 2406.8,
+        "used_pct": 63.2,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 512.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 927.6,
+        "used_gb": 98.5
+      }
+    },
+    {
+      "ts": 1790514845.9196305,
+      "label": "infer:he2dapi:patch_end",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 1330.5,
+        "used_mb": 2477.1,
+        "used_pct": 65.1,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 507.9
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 927.6,
+        "used_gb": 98.5
+      }
+    },
+    {
+      "ts": 1790514846.0054646,
+      "label": "infer:he2dapi:end",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 1332.0,
+        "used_mb": 2475.6,
+        "used_pct": 65.0,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 507.5
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 927.6,
+        "used_gb": 98.5
+      }
+    },
+    {
+      "ts": 1790514849.9239876,
+      "label": "infer:dapi2he:start",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 1443.1,
+        "used_mb": 2364.5,
+        "used_pct": 62.1,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 506.3
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 927.6,
+        "used_gb": 98.5
+      }
+    },
+    {
+      "ts": 1790514871.4945128,
+      "label": "infer:dapi2he:patch_end",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 1337.0,
+        "used_mb": 2470.6,
+        "used_pct": 64.9,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 505.8
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 927.6,
+        "used_gb": 98.5
+      }
+    },
+    {
+      "ts": 1790514871.6724684,
+      "label": "infer:dapi2he:end",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 1398.7,
+        "used_mb": 2408.9,
+        "used_pct": 63.3,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 505.8
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 927.6,
+        "used_gb": 98.5
+      }
+    }
+  ],
+  "budget_mb": 1536.0,
+  "spike_mb": 500
+}

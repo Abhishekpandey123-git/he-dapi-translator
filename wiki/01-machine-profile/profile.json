@@ -1,0 +1,278 @@
+{
+  "history": [
+    {
+      "ts": 1789829995.80703,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2533.7,
+        "used_mb": 1273.9,
+        "used_pct": 33.5,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 929.9,
+        "used_gb": 96.2
+      }
+    },
+    {
+      "ts": 1789830363.415824,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2418.5,
+        "used_mb": 1389.1,
+        "used_pct": 36.5,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 929.9,
+        "used_gb": 96.2
+      }
+    },
+    {
+      "ts": 1789830489.657958,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2444.6,
+        "used_mb": 1363.1,
+        "used_pct": 35.8,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 929.8,
+        "used_gb": 96.3
+      }
+    },
+    {
+      "ts": 1789830494.3574407,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2473.0,
+        "used_mb": 1334.6,
+        "used_pct": 35.1,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 929.8,
+        "used_gb": 96.3
+      }
+    },
+    {
+      "ts": 1790428678.4769287,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2643.9,
+        "used_mb": 1163.7,
+        "used_pct": 30.6,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 929.8,
+        "used_gb": 96.3
+      }
+    },
+    {
+      "ts": 1790428814.052934,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2557.9,
+        "used_mb": 1249.7,
+        "used_pct": 32.8,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 929.7,
+        "used_gb": 96.4
+      }
+    },
+    {
+      "ts": 1790429307.936925,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2457.5,
+        "used_mb": 1350.1,
+        "used_pct": 35.5,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1021.8
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 928.5,
+        "used_gb": 97.6
+      }
+    },
+    {
+      "ts": 1790429418.4841824,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2471.1,
+        "used_mb": 1336.5,
+        "used_pct": 35.1,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1021.8
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 928.5,
+        "used_gb": 97.6
+      }
+    },
+    {
+      "ts": 1790429431.3236384,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2300.4,
+        "used_mb": 1507.2,
+        "used_pct": 39.6,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1021.8
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 928.5,
+        "used_gb": 97.6
+      }
+    },
+    {
+      "ts": 1790429765.135286,
+      "label": "train:oom",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 660.1,
+        "used_mb": 3147.5,
+        "used_pct": 82.7,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 858.2
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 928.5,
+        "used_gb": 97.6
+      }
+    },
+    {
+      "ts": 1790429955.772179,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 1708.1,
+        "used_mb": 2099.5,
+        "used_pct": 55.1,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 891.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 928.5,
+        "used_gb": 97.6
+      }
+    },
+    {
+      "ts": 1790478707.8437433,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 1596.2,
+        "used_mb": 2211.4,
+        "used_pct": 58.1,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 565.4
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 928.0,
+        "used_gb": 98.1
+      }
+    },
+    {
+      "ts": 1791470452.0035377,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2598.5,
+        "used_mb": 1209.1,
+        "used_pct": 31.8,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 920.6,
+        "used_gb": 105.6
+      }
+    },
+    {
+      "ts": 1791560715.5872936,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2630.7,
+        "used_mb": 1177.0,
+        "used_pct": 30.9,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 919.9,
+        "used_gb": 106.2
+      }
+    },
+    {
+      "ts": 1791560845.4178667,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2603.6,
+        "used_mb": 1204.0,
+        "used_pct": 31.6,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1024.0
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 919.9,
+        "used_gb": 106.2
+      }
+    },
+    {
+      "ts": 1791875452.088232,
+      "label": "cli:check",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 2572.5,
+        "used_mb": 1235.1,
+        "used_pct": 32.4,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1022.9
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 917.3,
+        "used_gb": 108.8
+      }
+    }
+  ],
+  "budget_mb": 1536.0,
+  "spike_mb": 500
+}

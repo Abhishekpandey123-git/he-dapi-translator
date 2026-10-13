@@ -1,0 +1,35 @@
+# Optimized for 3.7GB CPU box - 10h overnight run
+data:
+  name: hemit
+  root: data/raw/hemit
+  processed: data/processed/hemit_train_512.h5
+  patch_size: 512
+  num_workers: 0
+  stain_norm: none
+  lowram_subset: 500  # 500 vs 3717 -> 4x faster, 32min/epoch vs 235min
+  augmentation:
+    hflip: 0.5
+    vflip: 0.5
+    affine: {degrees: 10, translate: 0.1}
+    color_jitter: {brightness: 0.1, contrast: 0.1}
+    stain_aug: false  # disable extra CPU aug to save 200MB
+model:
+  name: dual_branch_pix2pix
+  generator: {arch: dual_branch, ngf: 32, n_blocks: 6}  # 32 vs 64 halves params (~6M vs 24M), n_blocks 6 vs 9
+  discriminator: {arch: patchgan, ndf: 32, n_layers: 3}
+  loss: {gan_weight: 1.0, l1_weight: 100.0, ssim_weight: 10.0, dists_weight: 0.0, nuclei_aux_weight: 0.0}  # disable nuclei aux to save StarDist mem
+training:
+  epochs: 30  # 30 vs 200 - early stop, checkpoint every 1 allows extend later
+  batch_size: 2
+  grad_accum: 4
+  num_workers: 0
+  lr: 0.0002
+  beta1: 0.5
+  mixed_precision: false
+  dists_on_cpu: false
+  checkpoint_dir: resources/models/checkpoints/he2dapi_lowram
+  save_every: 1
+  resume: auto
+  export_onnx: false
+  oom_guard: true
+  max_cache_mb: 2  # 2 vs 4 halves H5 cache

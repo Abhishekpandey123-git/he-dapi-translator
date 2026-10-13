@@ -1,0 +1,58 @@
+# configs/hemit_dual_branch.yaml - Paired Pix2Pix training on HEMIT
+data:
+  name: hemit
+  root: data/raw/hemit
+  processed: data/processed/hemit_train_512.h5  # OPTIMIZED: use split 3717 not combined 5292 to keep epoch <2GB; for full use hemit_512.h5 with indices
+  patch_size: 512
+  central_crop: 512   # from 1024 HEMIT patch
+  split: [3717, 630, 945]  # train/val/test from paper
+  num_workers: 0  # moved to training.num_workers for clarity
+  stain_norm: none  # was macenko (SVD per sample 10ms, 2× RAM spike) -> use none on CPU, enable after profiling
+  lowram_subset: null  # e.g. 200 for smoke test on 3.7GB box
+  augmentation:
+    hflip: 0.5
+    vflip: 0.5
+    affine: {degrees: 10, translate: 0.1}
+    color_jitter: {brightness: 0.1, contrast: 0.1}
+    stain_aug: true
+
+model:
+  name: dual_branch_pix2pix  # pix2pix | dual_branch | diffusion
+  generator:
+    arch: dual_branch  # cnn_resnet + swin_transformer + FMF
+    ngf: 64
+    n_blocks: 9
+  discriminator:
+    arch: patchgan
+    ndf: 64
+    n_layers: 3
+  loss:
+    gan_weight: 1.0
+    l1_weight: 100.0
+    ssim_weight: 10.0
+    dists_weight: 5.0
+    nuclei_aux_weight: 2.0  # Dice on StarDist pseudo-labels
+
+training:
+  epochs: 200
+  batch_size: 2  # OPTIMIZED for 3.7GB RAM CPU box: was 8 -> OOM (75MB*3 grads + VGG 400MB = >1.2GB per batch). Now 2 + grad_accum 4 => effective 8.
+  grad_accum: 4
+  num_workers: 0  # was 8 -> each worker dup file handle + RAM spike; 0 is safest on WSL2 CPU
+  lr: 0.0002
+  beta1: 0.5
+  scheduler: linear_decay  # after 100 epochs decay
+  mixed_precision: false  # was true but CPU has no AMP -> overhead + fallback to fp32; disable for stability
+  precision: fp32
+  dists_on_cpu: false  # disable VGG DISTS on CPU (400MB) -> fallback L1, else OOM
+  log_every: 100
+  val_every: 5
+  checkpoint_dir: resources/models/checkpoints/he2dapi
+  save_every: 1  # resumable: checkpoint every N epochs (atomic + checkpoint_last.pt)
+  resume: auto  # auto-resume from checkpoint_last.pt if exists
+  export_onnx: true
+  oom_guard: true  # halve batch if RAM >80%
+  max_cache_mb: 4  # h5 chunk cache
+
+experiment:
+  tracker: mlflow  # mlflow | wandb | none
+  project: he-dapi-translator

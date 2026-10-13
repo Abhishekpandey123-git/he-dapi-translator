@@ -1,0 +1,46 @@
+# configs/cyclegan_dapi2he.yaml - Unpaired DAPI -> H&E
+data:
+  name: unpaired_dapi2he
+  he_root: data/raw/mhist  # or tiled TCGA H&E (fallback to data/processed/mhist_512.h5 if PNGs missing)
+  dapi_root: data/processed/hemit_train_512.h5  # OPTIMIZED: use H5 DAPI channel (was data/raw/hemit/dapi which empty) -> streaming via datasets.py H5 fallback
+  patch_size: 256
+  stain_norm: none  # was macenko (spike) -> none for CPU
+  unpaired: true
+  he_h5_fallback: data/processed/mhist_512.h5
+  dapi_h5_fallback: data/processed/hemit_train_512.h5
+
+model:
+  name: cyclegan
+  generator:
+    arch: resnet
+    n_blocks: 9
+    ngf: 64
+  discriminator:
+    arch: patchgan
+    ndf: 64
+  loss:
+    gan_weight: 1.0
+    cycle_weight: 10.0
+    identity_weight: 5.0
+    # CUT variant:
+    nce_weight: 2.0
+    sacsi_weight: 1.0  # cellular intensity consistency
+
+training:
+  epochs: 200
+  batch_size: 2  # was 4 -> 2 for 3.7GB (CycleGAN has 2G+2D = 4 nets ~ 2× RAM of pix2pix)
+  grad_accum: 4
+  num_workers: 0  # was implicit 8 -> 0
+  lr: 0.0002
+  mixed_precision: false
+  dists_on_cpu: false
+  checkpoint_dir: resources/models/checkpoints/dapi2he
+  save_every: 1  # resumable
+  resume: auto
+  oom_guard: true
+
+wsi_infer:
+  tile_size: 512
+  stride: 256  # 50% overlap
+  blend: gaussian  # linear | gaussian
+  frequency_aware: true  # D-VST style
