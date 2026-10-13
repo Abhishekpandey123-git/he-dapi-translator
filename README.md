@@ -2,7 +2,9 @@
 
 Bi-directional virtual staining for histopathology: **H&E (RGB) ↔ DAPI (grayscale)**, for single patches and whole-slide images (WSI). Paired Pix2Pix + unpaired CycleGAN, FastAPI backend, drag-and-drop frontend, Docker deploy.
 
-![status](https://img.shields.io/badge/training-137%2F200%20(68.5%25)-blue) ![loss](https://img.shields.io/badge/G--loss-1.6632-green) ![psnr](https://img.shields.io/badge/val--PSNR-29.3dB-green) ![stack](https://img.shields.io/badge/PyTorch-2.14%20CPU-orange) [![guards](https://github.com/urbiologicalpa/he-dapi-translator/actions/workflows/ci.yml/badge.svg)](https://github.com/urbiologicalpa/he-dapi-translator/actions)
+![status](https://img.shields.io/badge/training-137%2F200%20(68.5%25)-blue) ![loss](https://img.shields.io/badge/G--loss-1.6632-green) ![psnr](https://img.shields.io/badge/val--PSNR-29.3dB-green) ![stack](https://img.shields.io/badge/PyTorch-2.14%20CPU-orange) [![guards](https://github.com/urbiologicalpa/he-dapi-translator/actions/workflows/ci.yml/badge.svg)](https://github.com/urbiologicalpa/he-dapi-translator/actions) ![building](https://img.shields.io/badge/status-actively%20building-orange) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)](CONTRIBUTING.md)
+
+> 🚧 **Actively building in public** — model training live (137/200 epochs), roadmap tracked in [Issues](https://github.com/urbiologicalpa/he-dapi-translator/issues), milestones cut as [Releases](https://github.com/urbiologicalpa/he-dapi-translator/releases). Contributors welcome — start with [CONTRIBUTING.md](CONTRIBUTING.md).
 
 > **Why this repo stands out:** the product-grade model (3,717 images, 512px, ngf64/9-block generator, 200 epochs) is being trained **on a 3.7GB RAM, CPU-only laptop** — via streaming-by-default engineering (10.6GB → 140MB pack peak, 4.8GB → 512MB WSI budget) with crash-resume safety across reboots. See [the constraint story](#engineering-under-constraints).
 
