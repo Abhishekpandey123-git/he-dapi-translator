@@ -2,9 +2,13 @@
 
 Bi-directional virtual staining for histopathology: **H&E (RGB) ↔ DAPI (grayscale)**, for single patches and whole-slide images (WSI). Paired Pix2Pix + unpaired CycleGAN, FastAPI backend, drag-and-drop frontend, Docker deploy.
 
-![status](https://img.shields.io/badge/training-137%2F200%20(68.5%25)-blue) ![loss](https://img.shields.io/badge/G--loss-1.6632-green) ![psnr](https://img.shields.io/badge/val--PSNR-29.3dB-green) ![stack](https://img.shields.io/badge/PyTorch-2.14%20CPU-orange)
+![status](https://img.shields.io/badge/training-137%2F200%20(68.5%25)-blue) ![loss](https://img.shields.io/badge/G--loss-1.6632-green) ![psnr](https://img.shields.io/badge/val--PSNR-29.3dB-green) ![stack](https://img.shields.io/badge/PyTorch-2.14%20CPU-orange) [![guards](https://github.com/urbiologicalpa/he-dapi-translator/actions/workflows/ci.yml/badge.svg)](https://github.com/urbiologicalpa/he-dapi-translator/actions)
 
 > **Why this repo stands out:** the product-grade model (3,717 images, 512px, ngf64/9-block generator, 200 epochs) is being trained **on a 3.7GB RAM, CPU-only laptop** — via streaming-by-default engineering (10.6GB → 140MB pack peak, 4.8GB → 512MB WSI budget) with crash-resume safety across reboots. See [the constraint story](#engineering-under-constraints).
+
+| H&E input | DAPI target |
+|---|---|
+| ![H&E](data/examples/he_example.png) | ![DAPI](data/examples/dapi_example.png) |
 
 ## Results so far (live training)
 
@@ -70,10 +74,13 @@ src/models/     datasets, losses, Pix2Pix + CycleGAN trainers, inference
 src/utils/      resource monitor, tiling, WSI loader, stain-norm, progress tracker
 src/backend/    FastAPI inference server (429 throttling)
 src/frontend/   drag-and-drop UI
+pack_hemit.py / pack_bci.py / hemit_extract.py   streaming dataset builders (repo root)
+he-dapi-product-gpu-train.py                     Kaggle GPU offload script (stood down, see post-mortem in TRACKER)
 resources/      dataset scripts, model cards, papers
 docs/           WORKPLAN, TRACKER, progress.json, metrics, reports
 wiki/           per-stage optimization notes (the constraint story)
-tests/          resource-guard regression tests
+tests/          resource-guard regression tests (mirrored in CI)
+.github/workflows/ci.yml  guard tests on every push
 ```
 
 ## Roadmap

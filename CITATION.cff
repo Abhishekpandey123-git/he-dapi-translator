@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: "H&E ↔ DAPI Virtual Staining Translator"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: Kumar
+    given-names: Bikash
+    alias: urbiologicalpa
+repository-code: "https://github.com/urbiologicalpa/he-dapi-translator"
+license: MIT
+keywords:
+  - virtual-staining
+  - histopathology
+  - pix2pix
+  - cyclegan
+  - medical-imaging
+  - low-resource-ml

@@ -1,0 +1,21 @@
+name: guards
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  resource-guards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install light deps (no torch — guards are static + numpy checks)
+        run: pip install numpy pillow pyyaml psutil tifffile zarr h5py pytest
+      - name: Low-RAM config enforcement
+        run: PYTHONPATH=. python -m src.utils.progress_tracker --enforce
+      - name: Resource-guard regression tests
+        run: PYTHONPATH=. python -m pytest tests/test_resource_guards.py -v
