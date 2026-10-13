@@ -2,7 +2,7 @@
 
 Bi-directional virtual staining for histopathology: **H&E (RGB) ↔ DAPI (grayscale)**, for single patches and whole-slide images (WSI). Paired Pix2Pix + unpaired CycleGAN, FastAPI backend, drag-and-drop frontend, Docker deploy.
 
-![status](https://img.shields.io/badge/training-137%2F200%20(68.5%25)-blue) ![loss](https://img.shields.io/badge/G--loss-1.6632-green) ![psnr](https://img.shields.io/badge/val--PSNR-29.3dB-green) ![stack](https://img.shields.io/badge/PyTorch-2.14%20CPU-orange) [![guards](https://github.com/urbiologicalpa/he-dapi-translator/actions/workflows/ci.yml/badge.svg)](https://github.com/urbiologicalpa/he-dapi-translator/actions) ![building](https://img.shields.io/badge/status-actively%20building-orange) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)](CONTRIBUTING.md)
+![stack](https://img.shields.io/badge/PyTorch-2.14%20CPU-orange) [![guards](https://github.com/urbiologicalpa/he-dapi-translator/actions/workflows/ci.yml/badge.svg)](https://github.com/urbiologicalpa/he-dapi-translator/actions) ![building](https://img.shields.io/badge/status-actively%20building-orange) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)](CONTRIBUTING.md)
 
 > 🚧 **Actively building in public** — model training live (137/200 epochs), roadmap tracked in [Issues](https://github.com/urbiologicalpa/he-dapi-translator/issues), milestones cut as [Releases](https://github.com/urbiologicalpa/he-dapi-translator/releases). Contributors welcome — start with [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -12,7 +12,7 @@ Bi-directional virtual staining for histopathology: **H&E (RGB) ↔ DAPI (graysc
 |---|---|
 | ![H&E](data/examples/he_example.png) | ![DAPI](data/examples/dapi_example.png) |
 
-## Results so far (live training)
+## 🔨 Build progress (live training — not done yet)
 
 | Metric | Value | Detail |
 |---|---|---|
