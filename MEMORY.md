@@ -1,6 +1,6 @@
 # MEMORY - H&E <-> DAPI Session Checkpoint 2026-09-27
 
-> Updated 2026-10-13 14:25 UTC: 🟢 RUNNING 1-WEEK MODE PID799 epoch138/200 from ckpt137 (loss 1.6632 NEW LOW, 137/200 68.5% Oct-13 14:21). Pace ~2.8h/ep, watch866+keepalive867 300s WEEK-MODE. 63 left → finish ~Oct-19/20. Git staged+committed (75 files, 72ee742) awaiting push to github.com/urbiologicalpaa. Tracker 45%, Phase2 68%. KAGGLE OFF. Token ONLY at ~/.kaggle/api_token (600).
+> Updated 2026-10-14 03:56 UTC: 🟢 RUNNING 1-WEEK MODE PID799 epoch143/200 from ckpt142 (142/200 71%, best ep140 loss 1.5842 dip outlier-watch, ep141-142 recovering). Pace ~2.4h/ep, watch866+keepalive867 300s. 58 left → finish ~Oct-19/20. Unpaired CycleGAN 200 in plan, decide at ep200. Tracker 45%, Phase2 71%. KAGGLE OFF. Token ONLY at ~/.kaggle/api_token (600).
 
 ## Current Status (Updated 2026-10-03 14:43 UTC — syncs with `docs/progress.json:runs` + `docs/TRACKER.md:Live Runs`)
 

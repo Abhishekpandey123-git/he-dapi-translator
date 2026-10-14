@@ -15,7 +15,7 @@
 
 | Run | Status | Detail |
 |-----|--------|--------|
-| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID799` epoch138/200 from `ckpt137` (loss 1.6632 NEW LOW, `137/200 68.5%` Oct-13 14:21) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.8h/ep. Watch866 + keepalive867 300s. 63 left → finish ~Oct-19/20. |
+| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID799` epoch143/200 from `ckpt142` (`142/200 71%`, best ep140 loss 1.5842 dip — outlier watch, ep141 1.6103 / ep142 1.6285 recovering) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep. Watch866 + keepalive867 300s. 58 left → finish ~Oct-19/20. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
 | Kaggle | ⬜ CANCELLED, STAND DOWN | stays OFF until GPU quota refreshes |
 | Epoch ground truth | 53/200 done (26.5%) | `checkpoint_epoch53.pt` + `checkpoint_last.pt` Oct-02 18:45 (internal epoch 52); loss 1.8942 |
 | ⚠️ Gap (kept) | No validation runs | `val_every: 5` unused in `train_paired.py` — loss-only; SSIM/PSNR/Dice Phase 4 TODO |
@@ -146,6 +146,7 @@
 - **2026-10-13 11:07**: ✅ ckpt136 DONE loss 1.6666 NEW LOW (`136/200 68%`). STOPPED all (train 780 3.5h epoch + watch 813 + keepalive 818) for user SYSTEM RESTART — pace stuck 3.4h/ep, want <2.3h. Only ~2 min epoch137 sacrificed. SAFE TO REBOOT, resume epoch137 (64 left)
 - **2026-10-13 11:33**: 🚀 RELAUNCHED 1-WEEK MODE `PID799` epoch137/200 from `ckpt136` (`nice10 -u -m --resume auto --optimize-for lowram`, `watch866` + `keepalive867` 300s, `setsid+disown` detach). Step20 OK 4.5s/step fresh pace ~2.3h/ep (reboot fixed thermal/swap), RAM 60% avail 1315MB. 64 left → finish ~Oct-19/20 (~147h). Kaggle OFF
 - **2026-10-13 14:21**: ✅ ckpt137 DONE loss 1.6632 NEW LOW (`137/200 68.5%`), epoch138 step260 RUNNING `PID799` ~2.8h/ep. 63 left → finish ~Oct-19/20. Git staged+committed locally (75 files) for github.com/urbiologicalpaa push
+- **2026-10-14 03:56**: 🚀 overnight +5: ckpt138 (1.6574) / 139 (1.6481) / 140 (**1.5842** −0.064 dip, outlier watch like ep79/ep90) / 141 (1.6103) / 142 (1.6285) DONE (`142/200 71%`). Epoch143 step560 (~30%) RUNNING `PID799` 16.5h ~2.4h/ep, RAM 54% healthy. 58 left → finish ~Oct-19. Unpaired CycleGAN 200 kept in plan, decide at ep200. GitHub building-framed + CI + issues + release live
 
 ## How to use tracker
 
