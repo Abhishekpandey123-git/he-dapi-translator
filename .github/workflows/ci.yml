@@ -27,5 +27,5 @@ jobs:
         run: PYTHONPATH=. python -m pytest tests/test_resource_guards.py -v
       - name: Backend smoke (import + /health, no model weights needed)
         run: |
-          pip install fastapi httpx
+          pip install fastapi httpx python-multipart
           PYTHONPATH=. python -c "from src.backend.main import app; from fastapi.testclient import TestClient; c=TestClient(app); r=c.get('/health'); assert r.status_code==200, r.text; print('HEALTH_OK', r.json())"
