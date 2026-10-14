@@ -172,6 +172,7 @@ python src/models/train_unpaired.py --config configs/cyclegan_dapi2he.yaml --res
 ## Infra
 - Env: `/tmp/he-venv/bin/python` (h5py ok, torch not installed yet, needs `pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu`)
 - Tests: `tests/test_imports.py:1` smoke tests (tiling, datasets, infer)
+- Tokens/auth (reboot-safe, lesson 2026-10-14): GitHub `~/.github_pat`, Kaggle `~/.kaggle/api_token`, HF `~/.hf_token` (all 600, home dir, never in repo) + `git credential.helper` wired to `~/.github_pat`. Full map + reboot-relaunch order: `wiki/09-orchestration/SKILL.md:Token`.
 
 ## Links
 - HEMIT paper: https://arxiv.org/html/2403.18501v1 | Mendeley: 3gx53zm49d
