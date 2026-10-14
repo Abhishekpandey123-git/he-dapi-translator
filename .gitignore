@@ -27,3 +27,5 @@ nohup.out
 *.pat
 *token*
 *secret*
+# Private strategy notes (MVP edge — stays local, never pushed)
+private/

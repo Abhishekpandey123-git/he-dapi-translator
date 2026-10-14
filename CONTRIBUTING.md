@@ -18,6 +18,7 @@ No need to ask permission — comment on the issue, fork, PR.
 1. **Streaming by default** — never load a full H5/WSI into RAM. If peak rises >500MB on an existing flow, the PR isn't ready.
 2. **Guards must stay green** — `PYTHONPATH=. python -m pytest tests/test_resource_guards.py` (11 tests) + `progress_tracker --enforce`. CI runs both on every push.
 3. **Never commit**: datasets/checkpoints (`*.h5`, `*.pt` — gitignored), logs, tokens/keys (use env vars: `HF_TOKEN`, `KAGGLE_API_TOKEN`). Push protection is on and *will* block secrets.
+4. **Public vs private (repo is public, MVP edge matters)** — PUBLIC: code, CI/CD, user docs, released metrics, tool-paper framing. PRIVATE (`private/`, gitignored, never pushed): novelty reasoning deltas, unpublished failures/metrics, quota/token notes, launch drafts. Note: `docs/NOVELTY_REPORT.md` + `docs/WORKPLAN.md` + `docs/TRACKER.md` history are already public — new strategy thinking stays in `private/`.
 4. **Small, resumable steps** — long work must checkpoint so a crash doesn't lose it (see `watch_runs.sh` / keepalive pattern in `wiki/09-orchestration/`).
 
 ## Setup (CPU)

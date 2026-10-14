@@ -21,6 +21,14 @@ jobs:
           python-version: "3.11"
       - name: Install light deps (no torch — guards are static + numpy checks)
         run: pip install numpy pillow pyyaml psutil tifffile zarr h5py pytest
+      - name: Secret scan (block tokens/keys from public repo)
+        run: |
+          echo "Scanning tracked text files for leaked secrets..."
+          if git grep -n -E "ghp_[A-Za-z0-9]{10,}|gho_[A-Za-z0-9]{10,}|hf_[A-Za-z0-9]{10,}|KGAT_[A-Za-z0-9]{10,}|AKIA[0-9A-Z]{16}|xox[bap]-[A-Za-z0-9-]+" -- . ':!*.pt' ':!*.h5' ':!*.hdf5' ':!*.ckpt' | grep -v "KGAT_\.\.\." ; then
+            echo "::error::Possible secret in tracked files — remove it, use env vars (HF_TOKEN, KAGGLE_API_TOKEN, GITHUB_TOKEN) instead."
+            exit 1
+          fi
+          echo "SECRET_SCAN_OK (redacted KGAT_... placeholders allowed)"
       - name: Low-RAM config enforcement
         run: PYTHONPATH=. python -m src.utils.progress_tracker --enforce
       - name: Resource-guard regression tests
