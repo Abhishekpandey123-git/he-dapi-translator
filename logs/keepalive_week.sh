@@ -7,5 +7,11 @@ while true; do
     nohup nice -n 10 env PYTHONPATH=. .venv/bin/python -u -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram >> logs/train_paired.log 2>&1 &
     echo "[KEEPALIVE] new PID $!" >> logs/keepalive.log
   fi
+  if ! pgrep -f "watch_runs.sh" > /dev/null 2>&1; then
+    echo "[KEEPALIVE $(date -u +%Y-%m-%dT%H:%M:%SZ)] WATCH DEAD -> relaunching watch_runs.sh (300s week-mode)" >> logs/keepalive.log
+    setsid nohup bash watch_runs.sh >> logs/monitor.log 2>&1 < /dev/null &
+    echo $! > logs/watch.pid
+    echo "[KEEPALIVE] watch PID $!" >> logs/keepalive.log
+  fi
   sleep 300
 done
