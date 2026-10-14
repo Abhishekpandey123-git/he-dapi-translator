@@ -1,40 +1,6 @@
 {
   "history": [
     {
-      "ts": 1791965196.6013038,
-      "label": "train:step1760",
-      "ram": {
-        "total_mb": 3807.6,
-        "avail_mb": 1732.7,
-        "used_mb": 2075.0,
-        "used_pct": 54.5,
-        "swap_total_mb": 1024.0,
-        "swap_free_mb": 702.5
-      },
-      "disk": {
-        "total_gb": 1081.1,
-        "free_gb": 916.6,
-        "used_gb": 109.5
-      }
-    },
-    {
-      "ts": 1791965299.456523,
-      "label": "train:step1780",
-      "ram": {
-        "total_mb": 3807.6,
-        "avail_mb": 1791.5,
-        "used_mb": 2016.1,
-        "used_pct": 52.9,
-        "swap_total_mb": 1024.0,
-        "swap_free_mb": 702.5
-      },
-      "disk": {
-        "total_gb": 1081.1,
-        "free_gb": 916.6,
-        "used_gb": 109.5
-      }
-    },
-    {
       "ts": 1791965397.208257,
       "label": "train:step1800",
       "ram": {
@@ -3393,6 +3359,40 @@
         "used_pct": 64.1,
         "swap_total_mb": 1024.0,
         "swap_free_mb": 1012.6
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 916.4,
+        "used_gb": 109.7
+      }
+    },
+    {
+      "ts": 1791988469.3585083,
+      "label": "train:step960",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 1336.4,
+        "used_mb": 2471.2,
+        "used_pct": 64.9,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1012.5
+      },
+      "disk": {
+        "total_gb": 1081.1,
+        "free_gb": 916.4,
+        "used_gb": 109.7
+      }
+    },
+    {
+      "ts": 1791988601.236979,
+      "label": "train:step980",
+      "ram": {
+        "total_mb": 3807.6,
+        "avail_mb": 1574.2,
+        "used_mb": 2233.4,
+        "used_pct": 58.7,
+        "swap_total_mb": 1024.0,
+        "swap_free_mb": 1012.5
       },
       "disk": {
         "total_gb": 1081.1,
