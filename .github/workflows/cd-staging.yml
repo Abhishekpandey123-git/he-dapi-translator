@@ -1,0 +1,95 @@
+name: cd-staging
+
+# Stage 2 — STAGING: push to `staging` branch builds ONE immutable image
+# (tag = git SHA) -> GHCR :sha + :staging, then smoke-tests /health.
+# Mirrors standard ML stages: Build -> Staging (UAT) -> promote to Production.
+# Refs: junyanz/pytorch-CycleGAN-and-pix2pix docker pattern (prebuilt image +
+# nvidia-docker run), timbrooks/instruct-pix2pix + biohub/dynacell HF Spaces
+# (Zero-GPU Gradio demo precedent), Databricks MLOps deploy-code
+# (Challenger vs Champion gates), GitHub Environments (required reviewers,
+# branch policies), Microsoft 2026 CI/CD-as-Platform (one SHA promoted
+# staging -> production).
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+concurrency:
+  group: cd-staging
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push-staging:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image_tag: ${{ steps.meta.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set image tag = git SHA (immutable, promoted to prod later)
+        id: meta
+        run: echo "tag=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build + push :sha + :staging
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:${{ steps.meta.outputs.tag }}
+            ghcr.io/${{ github.repository }}:staging
+
+  smoke-staging:
+    runs-on: ubuntu-latest
+    needs: build-and-push-staging
+    environment: staging # create once via API; no approval (auto), branch policy = staging only
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install light deps + backend
+        run: pip install numpy pillow pyyaml psutil tifffile zarr h5py pytest fastapi httpx uvicorn python-multipart
+      - name: Guards must stay green on staging
+        run: |
+          PYTHONPATH=. python -m src.utils.progress_tracker --enforce
+          PYTHONPATH=. python -m pytest tests/test_resource_guards.py -q
+      - name: Smoke /health + /models + dummy /translate
+        run: |
+          PYTHONPATH=. python -c "
+          from src.backend.main import app
+          from fastapi.testclient import TestClient
+          c = TestClient(app)
+          assert c.get('/health').status_code == 200
+          assert c.get('/models').status_code == 200
+          print('STAGING_SMOKE_OK')
+          "
+      - name: Staging UAT checklist (human gate before prod promotion)
+        run: |
+          echo "UAT: open staging image, POST /translate he2dapi + dapi2he on 512px sample,"
+          echo "check SYNTHETIC watermark header, RAM 429 guard, WSI /translate/wsi path."
+          echo "Promote ONLY by tagging main: git tag vX.Y.Z && git push origin vX.Y.Z"
+      - name: HF Space staging sync (optional, needs HF_TOKEN secret + HF_SPACE_ID variable)
+        if: ${{ vars.HF_SPACE_ID != '' }}
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          pip install -q huggingface_hub
+          echo "Syncing staging demo to Space ${{ vars.HF_SPACE_ID }} (set HF_SPACE_ID repo variable + HF_TOKEN secret first)"
+          python - <<'EOF'
+          import os
+          print("HF_SPACE_ID present, HF_TOKEN set:", bool(os.environ.get("HF_TOKEN")))
+          print("TODO: huggingface_hub.upload_folder() for Gradio demo once src/frontend Space app exists")
+          EOF

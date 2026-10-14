@@ -1,9 +1,15 @@
 name: guards
 
+# Stage 0 — CI: fast low-RAM guards on every push/PR (no torch, no GPU).
+# Staging/production deploys live in cd-staging.yml / cd-production.yml.
 on:
   push:
-    branches: [main]
+    branches: [main, staging]
   pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   resource-guards:
@@ -19,3 +25,7 @@ jobs:
         run: PYTHONPATH=. python -m src.utils.progress_tracker --enforce
       - name: Resource-guard regression tests
         run: PYTHONPATH=. python -m pytest tests/test_resource_guards.py -v
+      - name: Backend smoke (import + /health, no model weights needed)
+        run: |
+          pip install fastapi httpx
+          PYTHONPATH=. python -c "from src.backend.main import app; from fastapi.testclient import TestClient; c=TestClient(app); r=c.get('/health'); assert r.status_code==200, r.text; print('HEALTH_OK', r.json())"

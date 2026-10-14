@@ -22,3 +22,8 @@ logs/*.pid
 logs/*.flag
 *.flag
 nohup.out
+# Secrets (never commit) — HF/GH/Docker tokens live outside repo
+.env
+*.pat
+*token*
+*secret*

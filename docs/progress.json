@@ -312,24 +312,28 @@
     {
       "date": "2026-10-14",
       "note": "11:17 UTC ckpt145 DONE (145/200 72.5%) 1.6318, D 0.7745 best-in-days; sideways band persists but recovering -> noise leaning. Epoch146 step300. 55 left."
+    },
+    {
+      "date": "2026-10-14",
+      "note": "13:02 UTC REBOOT ~12:49 killed PID799 at epoch146 step980 (~52%); ckpt145 10:50 SAFE, only ~1.2h redo lost. RELAUNCHED PID1203 epoch146 from ckpt145 + watch1272 + keepalive1283. 55 left."
     }
   ],
   "next_actions": [
-    "WEEK-MODE running: train799 epoch143 + watch866 + keepalive867. ckpt143 ETA ~05:30 UTC.",
+    "WEEK-MODE running: train1203 epoch146 (resume ckpt145) + watch1272 + keepalive1283. ckpt146 ETA ~15:30 UTC.",
     "kaggle STAND DOWN",
-    "58 remaining: ~140h at 2.4h/ep (finish ~Oct-19/20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
+    "55 remaining: ~132h at 2.4h/ep (finish ~Oct-19/20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
   ],
   "runs": {
     "local": {
       "status": "RUNNING",
-      "pid": 799,
+      "pid": 1203,
       "command": "nice -n 10 env PYTHONPATH=. .venv/bin/python -u -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram",
       "log": "logs/train_paired.log",
       "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch145.pt (epoch145 done)",
       "current_epoch": 146,
       "total_epochs": 200,
       "started": "2026-09-28T02:45Z",
-      "note": "2026-10-14 11:17 UTC: ckpt145 DONE (145/200 72.5%), 1.6318 (-0.009, half the uptick retraced), D 0.7745 healthiest in days -> leans noise over plateau. Epoch146 step300 running PID799. 55 left -> finish ~Oct-19."
+      "note": "2026-10-14 13:02 UTC: REBOOT ~12:49 killed PID799 at epoch146 step980 (~52%, only ~1.2h redo lost; ckpt145 10:50 SAFE). RELAUNCHED PID1203 epoch146 from ckpt145 + watch1272 + keepalive1283 (300s WEEK-MODE). 55 left -> finish ~Oct-19."
     },
     "kaggle": {
       "status": "CANCELLED_STAND_DOWN",
@@ -357,5 +361,5 @@
   },
   "tracker_version": "1.0",
   "generated": "2026-10-13T07:00:53.588015Z",
-  "last_verified": "2026-10-14T11:17Z"
+  "last_verified": "2026-10-14T13:02Z"
 }

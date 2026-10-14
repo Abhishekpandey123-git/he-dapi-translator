@@ -89,12 +89,26 @@ Metrics (see `resources/models/README.md`):
 - [ ] Add uncertainty: Monte Carlo dropout 5 passes -> variance map
 - [ ] Add content filter + disclaimer for clinical misuse
 
-### Phase 5 — Docker & Deployment (Week 11-12)
-- [ ] Dockerfile (see `docker/Dockerfile` scaffold): multi-stage, python slim + node build + cuda runtime
+### Phase 5 — Docker & Deployment (Week 11-12) — STAGED (CI -> Build -> Staging -> Production)
+Standard ML deploy stages (Databricks MLOps: Data Validation -> Training -> Validation -> Registration -> Deployment -> Monitoring; deploy-code Challenger/Champion; Microsoft 2026 one-SHA-promoted-immutably; GitHub Environments with branch policies + reviewers):
+
+| Stage | Trigger | Gate | Output |
+|-------|---------|------|--------|
+| 0 CI (`ci.yml`) | push `main`/`staging` + PR | `progress_tracker --enforce` + `test_resource_guards` (11) + backend `/health` smoke | green check |
+| 1 Build (`cd-staging.yml`) | push `staging` | Docker build once, tag = git SHA | `ghcr.io/...:<sha>` + `:staging` |
+| 2 Staging (`cd-staging.yml`, env `staging`) | auto after build | guards + `/health` + `/models` + dummy `/translate` smoke; human UAT (512px both directions, SYNTHETIC header, 429 guard, `/translate/wsi`) | UAT sign-off |
+| 3 Production (`cd-production.yml`, env `production`) | `git tag vX.Y.Z` on `main` / Release published; needs staging SHA success + reviewer approval | promote SAME SHA `:staging -> :vX.Y.Z + :latest` (no rebuild); optional Docker Hub mirror; attach ONNX + `metrics_eval.json` to Release | prod release; rollback = re-tag previous `v*` |
+
+- [ ] Dockerfile (see `docker/Dockerfile` scaffold): multi-stage, python slim + node build + cuda runtime + OCI labels
 - [ ] docker-compose for local: frontend:3000, backend:8000, mlflow:5000
-- [ ] Push to Docker Hub: `docker push <user>/he-dapi-translator:latest`
-- [ ] Deploy: Hugging Face Space (Gradio fallback) + optional Modal/RunPod GPU endpoint
-- [ ] CI: GitHub Actions -> auto build on push
+- [ ] Push to GHCR staging: auto on `staging` branch (`:sha` + `:staging`); prod promote on tag (`:vX.Y.Z` + `:latest`)
+- [ ] Push to Docker Hub mirror: `docker push <user>/he-dapi-translator:latest` (optional, needs `DOCKERHUB_TOKEN` secret)
+- [ ] Deploy: Hugging Face Space staging/prod (Gradio fallback, Zero-GPU like `timbrooks/instruct-pix2pix`, `biohub/dynacell` virtual-staining demo) + optional Modal/RunPod GPU endpoint (set `PROD_URL` repo variable for live health poll)
+- [ ] CI: GitHub Actions -> auto build on push (done: `ci.yml` guards; `cd-staging.yml`/`cd-production.yml` added)
+- [ ] Environments: `staging` (branch policy `staging`, no approval) + `production` (branch policy `main`/tags, required reviewers) — create via `gh api repos/{owner}/{repo}/environments/staging -X PUT` once `GITHUB_TOKEN` exported
+- [ ] Branch flow: `feature/*` -> PR -> `staging` (UAT) -> PR -> `main` (prod via tag). Create: `git branch staging && git push -u origin staging` (needs token)
+
+Refs: `junyanz/pytorch-CycleGAN-and-pix2pix` docker pattern (`taesungp` prebuilt + `nvidia-docker run`, `docs/docker.md`); HF Spaces `timbrooks/instruct-pix2pix` (1.5k likes, Zero GPU) + `biohub/dynacell` (staining demo); GitHub Environments docs (approval, branch policy, concurrency 1); Databricks ML CI/CD (version data+code+model, Challenger/Champion gates).
 
 ## 2. Novelty & Positioning
 See `docs/NOVELTY_REPORT.md` (summary: H&E->DAPI well-published since 2024, but bidirectional drag-drop WSI tool + Docker product is still gap). Our USP:

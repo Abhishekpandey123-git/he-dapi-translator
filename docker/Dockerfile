@@ -4,6 +4,10 @@
 # Push: docker tag he-dapi-translator <user>/he-dapi-translator:latest && docker push <user>/he-dapi-translator:latest
 
 FROM python:3.10-slim AS base
+LABEL org.opencontainers.image.title="he-dapi-translator" \
+      org.opencontainers.image.description="Bidirectional H&E<->DAPI virtual staining (Pix2Pix + CycleGAN), patch + WSI" \
+      org.opencontainers.image.source="https://github.com/urbiologicalpa/he-dapi-translator" \
+      org.opencontainers.image.licenses="MIT"
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \

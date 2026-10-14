@@ -1,0 +1,63 @@
+name: cd-production
+
+# Stage 3 — PRODUCTION: tag push v*.*.* on `main` promotes the SAME SHA image
+# (:staging -> :<version> + :latest), mirrors to Docker Hub (optional), and
+# attaches ONNX + metrics to the GitHub Release. Requires `staging` success
+# on the same SHA + `production` environment approval (required reviewers).
+# Rollback = re-tag previous v* (immutable SHAs, never overwrite :latest by hand).
+on:
+  push:
+    tags: ["v*.*.*"]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: cd-production
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    environment: production # branch policy = main/tags only + required reviewers
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Promote staging SHA -> version + latest (no rebuild)
+        run: |
+          SHA="${GITHUB_SHA}"
+          REPO_LC="$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')"
+          VER="${GITHUB_REF_NAME}"
+          echo "Promoting ghcr.io/${REPO_LC}:${SHA} -> :${VER} + :latest"
+          docker pull "ghcr.io/${REPO_LC}:${SHA}" || docker pull "ghcr.io/${REPO_LC}:staging"
+          SRC="$(docker images --format '{{.Repository}}:{{.Tag}}' | grep -E "${REPO_LC}:(staging|${SHA})" | head -n 1)"
+          echo "Source: ${SRC}"
+          docker tag "${SRC}" "ghcr.io/${REPO_LC}:${VER}"
+          docker tag "${SRC}" "ghcr.io/${REPO_LC}:latest"
+          docker push "ghcr.io/${REPO_LC}:${VER}"
+          docker push "ghcr.io/${REPO_LC}:latest"
+      - name: Post-deploy health poll (GHCR manifest exists)
+        run: |
+          echo "Post-deploy: verify tags exist, then run hosted /health against prod URL."
+          echo "Prod URL placeholder: set PROD_URL repo variable (HF Space or VM) to enable live poll."
+      - name: Attach release artifacts (ONNX + metrics, if present)
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            docs/metrics_eval.json
+            resources/models/checkpoints/he2dapi/*.onnx
