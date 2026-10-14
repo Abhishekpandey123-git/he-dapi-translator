@@ -15,7 +15,7 @@
 
 | Run | Status | Detail |
 |-----|--------|--------|
-| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID1203` epoch146/200 from `ckpt145` (`145/200 72.5%`, ep145 1.6318 retracing, D 0.7745 best-in-days; best ep140 1.5842 dip) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep. Watch1272 + keepalive1283 300s. 55 left → finish ~Oct-19/20. Reboot ~12:49 lost only epoch146 steps 0-980 redo (~1.2h). Unpaired CycleGAN 200 kept in plan, decide at ep200. |
+| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID1203` epoch147/200 from `ckpt146` (`146/200 73%`, ep146 1.6365 sideways +0.005, D 0.7730 healthy; best ep140 1.5842 dip) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep. Watch1272 + keepalive1283 300s. 54 left → finish ~Oct-19/20. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
 | Kaggle | ⬜ CANCELLED, STAND DOWN | stays OFF until GPU quota refreshes |
 | Epoch ground truth | 53/200 done (26.5%) | `checkpoint_epoch53.pt` + `checkpoint_last.pt` Oct-02 18:45 (internal epoch 52); loss 1.8942 |
 | ⚠️ Gap (kept) | No validation runs | `val_every: 5` unused in `train_paired.py` — loss-only; SSIM/PSNR/Dice Phase 4 TODO |
@@ -150,6 +150,7 @@
 - **2026-10-14 09:43**: ckpt143 (1.6244 recovering) / ckpt144 (1.6410 +0.017 uptick-watch) DONE (`144/200 72%`). 4 epochs sideways since ep140 dip (1.61→1.64) — noise cluster vs mild plateau, TBD; D-loss back to healthy 0.7825. Epoch145 step1080 (~58%) RUNNING `PID799` 22h ~2.4h/ep. 56 left → finish ~Oct-19
 - **2026-10-14 11:17**: ckpt145 DONE **1.6318** (−0.009, half the uptick retraced), D **0.7745** healthiest in days → leans **noise over plateau**, band persists one more epoch to confirm. `145/200 (72.5%)`. Epoch146 step300 (~16%) RUNNING `PID799` 23.75h. 55 left → finish ~Oct-19
 - **2026-10-14 13:02**: ⚠️ REBOOT ~12:49 (uptime 13min) killed PID799 + watch866 + keepalive867 at epoch146 step980 (~52%, last log 12:45). Truth `145/200` SAFE (`checkpoint_last.pt` 10:50, 79M, verified G 1.6318/D 0.7745) — only ~1.2h redo lost, no ckpt/data/tracker loss. ✅ RELAUNCHED `PID1203` epoch146 from ckpt145 + watch1272 + keepalive1283 WEEK-MODE 300s, 334% CPU healthy. 55 left → finish ~Oct-19
+- **2026-10-14 15:55**: ✅ ckpt146 DONE **1.6365** (+0.005 sideways, 6-epoch band since ep140 dip 1.5842; D **0.7730** healthy) `146/200 (73%)`. Epoch147 step120 RUNNING `PID1203` 2h53m ~2.4h/ep, RAM 59-63%. 54 left → finish ~Oct-19. CI/CD all green (guards + cd-staging `:staging` live); push-hygiene (secret-scan + `private/`) in place
 
 ## How to use tracker
 

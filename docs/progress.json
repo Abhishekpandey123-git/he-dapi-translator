@@ -40,13 +40,13 @@
       "id": 2,
       "name": "Modeling (W4-8) Dual Track",
       "status": "IN_PROGRESS",
-      "percent": 72,
+      "percent": 73,
       "artifacts": [
         "configs/hemit_dual_branch.yaml lowram",
         "src/models/train_paired.py grad_accum + D-loss/component logging",
         "src/models/losses.py Dice thresh 0.1 + SSIM proxy note",
         "src/models/eval_offline.py + docs/metrics_eval.json",
-        "resources/models/checkpoints/he2dapi/checkpoint_epoch145.pt (145/200 done 72.5%, ep145 1.6318 retracing, D 0.7745 best-in-days; best stays ep140 1.5842 dip; epoch146 running)"
+        "resources/models/checkpoints/he2dapi/checkpoint_epoch146.pt (146/200 done 73%, ep146 1.6365 +0.005 sideways, D 0.7730 healthy; best stays ep140 1.5842 dip; epoch147 running)"
       ],
       "optimization": "batch 2+accum4, num_workers 0, dists_off, OOM catch"
     },
@@ -316,12 +316,16 @@
     {
       "date": "2026-10-14",
       "note": "13:02 UTC REBOOT ~12:49 killed PID799 at epoch146 step980 (~52%); ckpt145 10:50 SAFE, only ~1.2h redo lost. RELAUNCHED PID1203 epoch146 from ckpt145 + watch1272 + keepalive1283. 55 left."
+    },
+    {
+      "date": "2026-10-14",
+      "note": "15:55 UTC ckpt146 DONE (146/200 73%) 1.6365 (+0.005 sideways, 6ep band since ep140 dip 1.5842; D 0.7730 healthy). Epoch147 step120 running PID1203. 54 left."
     }
   ],
   "next_actions": [
-    "WEEK-MODE running: train1203 epoch146 (resume ckpt145) + watch1272 + keepalive1283. ckpt146 ETA ~15:30 UTC.",
+    "WEEK-MODE running: train1203 epoch147 (resume ckpt146) + watch1272 + keepalive1283. ckpt147 ETA ~18:00 UTC.",
     "kaggle STAND DOWN",
-    "55 remaining: ~132h at 2.4h/ep (finish ~Oct-19/20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
+    "54 remaining: ~130h at 2.4h/ep (finish ~Oct-19/20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
   ],
   "runs": {
     "local": {
@@ -329,11 +333,11 @@
       "pid": 1203,
       "command": "nice -n 10 env PYTHONPATH=. .venv/bin/python -u -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram",
       "log": "logs/train_paired.log",
-      "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch145.pt (epoch145 done)",
-      "current_epoch": 146,
+      "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch146.pt (epoch146 done)",
+      "current_epoch": 147,
       "total_epochs": 200,
       "started": "2026-09-28T02:45Z",
-      "note": "2026-10-14 13:02 UTC: REBOOT ~12:49 killed PID799 at epoch146 step980 (~52%, only ~1.2h redo lost; ckpt145 10:50 SAFE). RELAUNCHED PID1203 epoch146 from ckpt145 + watch1272 + keepalive1283 (300s WEEK-MODE). 55 left -> finish ~Oct-19."
+      "note": "2026-10-14 15:55 UTC: ckpt146 DONE (146/200 73%), 1.6365 (+0.005 sideways band since ep140 dip; D 0.7730 healthy). Epoch147 step120 running PID1203. 54 left -> finish ~Oct-19."
     },
     "kaggle": {
       "status": "CANCELLED_STAND_DOWN",
@@ -361,5 +365,5 @@
   },
   "tracker_version": "1.0",
   "generated": "2026-10-13T07:00:53.588015Z",
-  "last_verified": "2026-10-14T13:02Z"
+  "last_verified": "2026-10-14T16:07Z"
 }
