@@ -15,7 +15,7 @@
 
 | Run | Status | Detail |
 |-----|--------|--------|
-| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID799` epoch145/200 from `ckpt144` (`144/200 72%`, ep143 1.6244, ep144 1.6410 uptick-watch; best ep140 1.5842 dip) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep. Watch866 + keepalive867 300s. 56 left → finish ~Oct-19/20. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
+| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID799` epoch146/200 from `ckpt145` (`145/200 72.5%`, ep145 1.6318 retracing, D 0.7745 best-in-days; best ep140 1.5842 dip) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep. Watch866 + keepalive867 300s. 55 left → finish ~Oct-19/20. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
 | Kaggle | ⬜ CANCELLED, STAND DOWN | stays OFF until GPU quota refreshes |
 | Epoch ground truth | 53/200 done (26.5%) | `checkpoint_epoch53.pt` + `checkpoint_last.pt` Oct-02 18:45 (internal epoch 52); loss 1.8942 |
 | ⚠️ Gap (kept) | No validation runs | `val_every: 5` unused in `train_paired.py` — loss-only; SSIM/PSNR/Dice Phase 4 TODO |
@@ -148,6 +148,7 @@
 - **2026-10-13 14:21**: ✅ ckpt137 DONE loss 1.6632 NEW LOW (`137/200 68.5%`), epoch138 step260 RUNNING `PID799` ~2.8h/ep. 63 left → finish ~Oct-19/20. Git staged+committed locally (75 files) for github.com/urbiologicalpaa push
 - **2026-10-14 03:56**: 🚀 overnight +5: ckpt138 (1.6574) / 139 (1.6481) / 140 (**1.5842** −0.064 dip, outlier watch like ep79/ep90) / 141 (1.6103) / 142 (1.6285) DONE (`142/200 71%`). Epoch143 step560 (~30%) RUNNING `PID799` 16.5h ~2.4h/ep, RAM 54% healthy. 58 left → finish ~Oct-19. Unpaired CycleGAN 200 kept in plan, decide at ep200. GitHub building-framed + CI + issues + release live
 - **2026-10-14 09:43**: ckpt143 (1.6244 recovering) / ckpt144 (1.6410 +0.017 uptick-watch) DONE (`144/200 72%`). 4 epochs sideways since ep140 dip (1.61→1.64) — noise cluster vs mild plateau, TBD; D-loss back to healthy 0.7825. Epoch145 step1080 (~58%) RUNNING `PID799` 22h ~2.4h/ep. 56 left → finish ~Oct-19
+- **2026-10-14 11:17**: ckpt145 DONE **1.6318** (−0.009, half the uptick retraced), D **0.7745** healthiest in days → leans **noise over plateau**, band persists one more epoch to confirm. `145/200 (72.5%)`. Epoch146 step300 (~16%) RUNNING `PID799` 23.75h. 55 left → finish ~Oct-19
 
 ## How to use tracker
 

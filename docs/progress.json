@@ -46,7 +46,7 @@
         "src/models/train_paired.py grad_accum + D-loss/component logging",
         "src/models/losses.py Dice thresh 0.1 + SSIM proxy note",
         "src/models/eval_offline.py + docs/metrics_eval.json",
-        "resources/models/checkpoints/he2dapi/checkpoint_epoch144.pt (144/200 done 72%, ep143 1.6244, ep144 1.6410 uptick-watch; best stays ep140 1.5842 dip; epoch145 running)"
+        "resources/models/checkpoints/he2dapi/checkpoint_epoch145.pt (145/200 done 72.5%, ep145 1.6318 retracing, D 0.7745 best-in-days; best stays ep140 1.5842 dip; epoch146 running)"
       ],
       "optimization": "batch 2+accum4, num_workers 0, dists_off, OOM catch"
     },
@@ -308,6 +308,10 @@
     {
       "date": "2026-10-14",
       "note": "09:43 UTC ckpt144 DONE (144/200 72%), ep143 1.6244, ep144 1.6410 uptick-watch (4ep sideways since ep140 dip; D healthy 0.78). Epoch145 step1080 ~2.4h/ep. 56 left."
+    },
+    {
+      "date": "2026-10-14",
+      "note": "11:17 UTC ckpt145 DONE (145/200 72.5%) 1.6318, D 0.7745 best-in-days; sideways band persists but recovering -> noise leaning. Epoch146 step300. 55 left."
     }
   ],
   "next_actions": [
@@ -321,11 +325,11 @@
       "pid": 799,
       "command": "nice -n 10 env PYTHONPATH=. .venv/bin/python -u -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram",
       "log": "logs/train_paired.log",
-      "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch144.pt (epoch144 done)",
-      "current_epoch": 145,
+      "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch145.pt (epoch145 done)",
+      "current_epoch": 146,
       "total_epochs": 200,
       "started": "2026-09-28T02:45Z",
-      "note": "2026-10-14 09:43 UTC: ckpt144 DONE (144/200 72%), ep143 1.6244 recovering, ep144 1.6410 (+0.017 uptick-watch, D back to 0.7825 healthy). Epoch145 step1080 running PID799 ~2.4h/ep. 56 left -> finish ~Oct-19."
+      "note": "2026-10-14 11:17 UTC: ckpt145 DONE (145/200 72.5%), 1.6318 (-0.009, half the uptick retraced), D 0.7745 healthiest in days -> leans noise over plateau. Epoch146 step300 running PID799. 55 left -> finish ~Oct-19."
     },
     "kaggle": {
       "status": "CANCELLED_STAND_DOWN",
@@ -353,5 +357,5 @@
   },
   "tracker_version": "1.0",
   "generated": "2026-10-13T07:00:53.588015Z",
-  "last_verified": "2026-10-14T09:43Z"
+  "last_verified": "2026-10-14T11:17Z"
 }

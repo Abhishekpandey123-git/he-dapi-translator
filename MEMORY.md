@@ -1,6 +1,6 @@
 # MEMORY - H&E <-> DAPI Session Checkpoint 2026-09-27
 
-> Updated 2026-10-14 09:43 UTC: 🟢 RUNNING 1-WEEK MODE PID799 epoch145/200 from ckpt144 (144/200 72%, ep143 1.6244, ep144 1.6410 uptick-watch; best ep140 1.5842 dip). 4ep sideways since dip — noise vs plateau TBD; D healthy 0.7825. Pace ~2.4h/ep, watch866+keepalive867 300s. 56 left → finish ~Oct-19/20. Unpaired CycleGAN 200 in plan, decide at ep200. Tracker 45%, Phase2 72%. KAGGLE OFF. Token ONLY at ~/.kaggle/api_token (600).
+> Updated 2026-10-14 11:17 UTC: 🟢 RUNNING 1-WEEK MODE PID799 epoch146/200 from ckpt145 (145/200 72.5%, 1.6318 retracing, D 0.7745 best-in-days → noise leaning; best ep140 1.5842 dip). Pace ~2.4h/ep, watch866+keepalive867 300s. 55 left → finish ~Oct-19/20. Unpaired CycleGAN 200 in plan, decide at ep200. Tracker 45%, Phase2 72%. KAGGLE OFF. Token ONLY at ~/.kaggle/api_token (600).
 
 ## Current Status (Updated 2026-10-03 14:43 UTC — syncs with `docs/progress.json:runs` + `docs/TRACKER.md:Live Runs`)
 
