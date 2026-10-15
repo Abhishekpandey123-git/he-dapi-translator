@@ -46,7 +46,7 @@
         "src/models/train_paired.py grad_accum + D-loss/component logging",
         "src/models/losses.py Dice thresh 0.1 + SSIM proxy note",
         "src/models/eval_offline.py + docs/metrics_eval.json",
-        "resources/models/checkpoints/he2dapi/checkpoint_epoch150.pt (150/200 done 75%, ep147 1.5945 dip / 148 1.6239 / 149 1.6245 / 150 1.6307 sideways, D 0.7705 healthy; best stays ep140 1.5842 dip; epoch151 running)"
+        "resources/models/checkpoints/he2dapi/checkpoint_epoch151.pt (151/200 done 75.5%, ep151 1.6348 sideways, D 0.7686 healthy; best stays ep140 1.5842 dip; epoch152 running)"
       ],
       "optimization": "batch 2+accum4, num_workers 0, dists_off, OOM catch"
     },
@@ -328,10 +328,14 @@
     {
       "date": "2026-10-15",
       "note": "04:25 UTC overnight +4: ckpt147 1.5945 (dip toward ep140 best 1.5842) / 148 1.6239 / 149 1.6245 / 150 1.6307 DONE (150/200 75%, sideways band persists; D 0.7705 healthy). Epoch151 step600 (~32%) RUNNING PID952 10.3h, pace steady ~2.4h/ep. 50 left."
+    },
+    {
+      "date": "2026-10-15",
+      "note": "06:25 UTC ckpt151 DONE 1.6348 (151/200 75.5%, sideways band persists; D 0.7686 healthy). Epoch152 step280 (~15%) RUNNING PID952 12.3h ~2.4h/ep steady. 49 left."
     }
   ],
   "next_actions": [
-    "WEEK-MODE running: train952 epoch151 (resume ckpt150) + watch1011 + keepalive1266. ckpt151 ETA ~06:30 UTC.",
+    "WEEK-MODE running: train952 epoch152 (resume ckpt151) + watch1011 + keepalive1266. ckpt152 ETA ~08:45 UTC.",
     "kaggle STAND DOWN",
     "54 remaining: ~130h at 2.4h/ep (finish ~Oct-19/20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
   ],
@@ -341,11 +345,11 @@
       "pid": 952,
       "command": "nice -n 10 env PYTHONPATH=. .venv/bin/python -u -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram",
       "log": "logs/train_paired.log",
-      "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch150.pt (epoch150 done)",
-      "current_epoch": 151,
+      "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch151.pt (epoch151 done)",
+      "current_epoch": 152,
       "total_epochs": 200,
       "started": "2026-09-28T02:45Z",
-      "note": "2026-10-15 04:25 UTC: overnight +4: ckpt147 1.5945 (dip toward ep140 best) / 148 1.6239 / 149 1.6245 / 150 1.6307 DONE (150/200 75%, sideways band persists; D 0.7705 healthy). Epoch151 step600 (~32%) RUNNING PID952 10.3h ~2.4h/ep steady. 50 left -> finish ~Oct-19."
+      "note": "2026-10-15 06:25 UTC: ckpt151 DONE 1.6348 (sideways band persists; D 0.7686 healthy). Epoch152 step280 (~15%) RUNNING PID952 12.3h ~2.4h/ep steady. 49 left -> finish ~Oct-19."
     },
     "kaggle": {
       "status": "CANCELLED_STAND_DOWN",
