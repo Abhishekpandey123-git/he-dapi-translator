@@ -40,13 +40,13 @@
       "id": 2,
       "name": "Modeling (W4-8) Dual Track",
       "status": "IN_PROGRESS",
-      "percent": 73,
+      "percent": 75,
       "artifacts": [
         "configs/hemit_dual_branch.yaml lowram",
         "src/models/train_paired.py grad_accum + D-loss/component logging",
         "src/models/losses.py Dice thresh 0.1 + SSIM proxy note",
         "src/models/eval_offline.py + docs/metrics_eval.json",
-        "resources/models/checkpoints/he2dapi/checkpoint_epoch146.pt (146/200 done 73%, ep146 1.6365 +0.005 sideways, D 0.7730 healthy; best stays ep140 1.5842 dip; epoch147 running)"
+        "resources/models/checkpoints/he2dapi/checkpoint_epoch150.pt (150/200 done 75%, ep147 1.5945 dip / 148 1.6239 / 149 1.6245 / 150 1.6307 sideways, D 0.7705 healthy; best stays ep140 1.5842 dip; epoch151 running)"
       ],
       "optimization": "batch 2+accum4, num_workers 0, dists_off, OOM catch"
     },
@@ -324,10 +324,14 @@
     {
       "date": "2026-10-14",
       "note": "18:30 UTC DOCS: push c5ea231 synced + guards green; token/auth map + reboot-relaunch order written to wiki/09-orchestration/SKILL.md (lesson: real file is ~/.github_pat not ~/.git_pat; credential helper wired reboot-safe). MEMORY Infra + TRACKER log point to it."
+    },
+    {
+      "date": "2026-10-15",
+      "note": "04:25 UTC overnight +4: ckpt147 1.5945 (dip toward ep140 best 1.5842) / 148 1.6239 / 149 1.6245 / 150 1.6307 DONE (150/200 75%, sideways band persists; D 0.7705 healthy). Epoch151 step600 (~32%) RUNNING PID952 10.3h, pace steady ~2.4h/ep. 50 left."
     }
   ],
   "next_actions": [
-    "WEEK-MODE running: train952 epoch147 (resume ckpt146) + watch1011 + keepalive1266 (now also restarts watch). ckpt147 ETA ~20:15 UTC.",
+    "WEEK-MODE running: train952 epoch151 (resume ckpt150) + watch1011 + keepalive1266. ckpt151 ETA ~06:30 UTC.",
     "kaggle STAND DOWN",
     "54 remaining: ~130h at 2.4h/ep (finish ~Oct-19/20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
   ],
@@ -337,11 +341,11 @@
       "pid": 952,
       "command": "nice -n 10 env PYTHONPATH=. .venv/bin/python -u -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram",
       "log": "logs/train_paired.log",
-      "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch146.pt (epoch146 done)",
-      "current_epoch": 147,
+      "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch150.pt (epoch150 done)",
+      "current_epoch": 151,
       "total_epochs": 200,
       "started": "2026-09-28T02:45Z",
-      "note": "2026-10-14 18:10 UTC: REBOOT ~17:59 killed PID1203 at epoch147 step1040 (~56%, train ran till 17:54, watch died 16:56). Truth 146/200 SAFE, only ~1.3h redo lost. RELAUNCHED PID952 epoch147 from ckpt146 + watch1011 + keepalive1266 WEEK-MODE 300s (keepalive now also restarts watch). Step20 OK 329% CPU. 54 left -> finish ~Oct-19."
+      "note": "2026-10-15 04:25 UTC: overnight +4: ckpt147 1.5945 (dip toward ep140 best) / 148 1.6239 / 149 1.6245 / 150 1.6307 DONE (150/200 75%, sideways band persists; D 0.7705 healthy). Epoch151 step600 (~32%) RUNNING PID952 10.3h ~2.4h/ep steady. 50 left -> finish ~Oct-19."
     },
     "kaggle": {
       "status": "CANCELLED_STAND_DOWN",
