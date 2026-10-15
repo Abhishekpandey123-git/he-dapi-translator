@@ -40,13 +40,13 @@
       "id": 2,
       "name": "Modeling (W4-8) Dual Track",
       "status": "IN_PROGRESS",
-      "percent": 75,
+      "percent": 77,
       "artifacts": [
         "configs/hemit_dual_branch.yaml lowram",
         "src/models/train_paired.py grad_accum + D-loss/component logging",
         "src/models/losses.py Dice thresh 0.1 + SSIM proxy note",
         "src/models/eval_offline.py + docs/metrics_eval.json",
-        "resources/models/checkpoints/he2dapi/checkpoint_epoch152.pt (152/200 done 76%, ep152 1.6178 -0.017 recovering; D 0.7685 healthy; best stays ep140 1.5842 dip; epoch153 running)"
+        "resources/models/checkpoints/he2dapi/checkpoint_epoch154.pt (154/200 done 77%, ep153 1.5718 NEW BEST / ep154 1.5997 bounce; D 0.7741 healthy; epoch155 running)"
       ],
       "optimization": "batch 2+accum4, num_workers 0, dists_off, OOM catch"
     },
@@ -336,10 +336,14 @@
     {
       "date": "2026-10-15",
       "note": "09:18 UTC ckpt152 DONE 1.6178 (152/200 76%, -0.017 recovering, best move since ep147 dip; D 0.7685 healthy). Epoch153 step720 (~39%) RUNNING PID952 15.2h ~2.4h/ep steady. 48 left."
+    },
+    {
+      "date": "2026-10-15",
+      "note": "13:49 UTC ckpt153 1.5718 NEW BEST (beats ep140 1.5842!) / ckpt154 1.5997 bounce DONE (154/200 77%). Epoch155 step560 (~30%) RUNNING PID952 19.8h ~2.4h/ep steady. 46 left."
     }
   ],
   "next_actions": [
-    "WEEK-MODE running: train952 epoch153 (resume ckpt152) + watch1011 + keepalive1266. ckpt153 ETA ~11:15 UTC.",
+    "WEEK-MODE running: train952 epoch155 (resume ckpt154) + watch1011 + keepalive1266. ckpt155 ETA ~16:00 UTC.",
     "kaggle STAND DOWN",
     "54 remaining: ~130h at 2.4h/ep (finish ~Oct-19/20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
   ],
@@ -349,11 +353,11 @@
       "pid": 952,
       "command": "nice -n 10 env PYTHONPATH=. .venv/bin/python -u -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram",
       "log": "logs/train_paired.log",
-      "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch152.pt (epoch152 done)",
-      "current_epoch": 153,
+      "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch154.pt (epoch154 done)",
+      "current_epoch": 155,
       "total_epochs": 200,
       "started": "2026-09-28T02:45Z",
-      "note": "2026-10-15 09:18 UTC: ckpt152 DONE 1.6178 (-0.017 recovering, best move since ep147 dip; D 0.7685 healthy). Epoch153 step720 (~39%) RUNNING PID952 15.2h ~2.4h/ep steady. 48 left -> finish ~Oct-19."
+      "note": "2026-10-15 13:49 UTC: ckpt153 1.5718 NEW BEST (beats ep140 1.5842!) / ckpt154 1.5997 bounce DONE (154/200 77%). Epoch155 step560 (~30%) RUNNING PID952 19.8h ~2.4h/ep steady. 46 left -> finish ~Oct-19."
     },
     "kaggle": {
       "status": "CANCELLED_STAND_DOWN",

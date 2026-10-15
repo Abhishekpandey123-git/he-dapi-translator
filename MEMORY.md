@@ -1,6 +1,6 @@
 # MEMORY - H&E <-> DAPI Session Checkpoint 2026-09-27
 
-> Updated 2026-10-15 09:18 UTC: 🟢 RUNNING 1-WEEK MODE PID952 epoch153/200 from ckpt152 (152/200 76%, 1.6178 −0.017 recovering, D 0.7685 healthy; best ep140 1.5842 dip). Pace steady ~2.4h/ep, watch1011+keepalive1266 300s. 48 left → finish ~Oct-19. CI/CD green (GHCR :staging live). Tracker 45%, Phase2 76%. KAGGLE OFF. Token ONLY at ~/.kaggle/api_token (600).
+> Updated 2026-10-15 13:49 UTC: 🟢 RUNNING 1-WEEK MODE PID952 epoch155/200 from ckpt154 (154/200 77%: ep153 1.5718 NEW BEST beats ep140, ep154 1.5997 bounce, D 0.7741 healthy). Pace steady ~2.4h/ep, watch1011+keepalive1266 300s. 46 left → finish ~Oct-19. CI/CD green (GHCR :staging live). Tracker 45%, Phase2 77%. KAGGLE OFF. Token ONLY at ~/.kaggle/api_token (600).
 
 ## Current Status (Updated 2026-10-03 14:43 UTC — syncs with `docs/progress.json:runs` + `docs/TRACKER.md:Live Runs`)
 
