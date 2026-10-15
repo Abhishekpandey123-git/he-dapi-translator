@@ -15,7 +15,7 @@
 
 | Run | Status | Detail |
 |-----|--------|--------|
-| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID952` epoch152/200 from `ckpt151` (`151/200 75.5%`, ep151 1.6348 sideways, D 0.7686 healthy; best ep140 1.5842 dip) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep steady. Watch1011 + keepalive1266 300s. 49 left → finish ~Oct-19. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
+| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID952` epoch153/200 from `ckpt152` (`152/200 76%`, ep152 1.6178 −0.017 recovering, D 0.7685 healthy; best ep140 1.5842 dip) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep steady. Watch1011 + keepalive1266 300s. 48 left → finish ~Oct-19. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
 | Kaggle | ⬜ CANCELLED, STAND DOWN | stays OFF until GPU quota refreshes |
 | Epoch ground truth | 53/200 done (26.5%) | `checkpoint_epoch53.pt` + `checkpoint_last.pt` Oct-02 18:45 (internal epoch 52); loss 1.8942 |
 | ⚠️ Gap (kept) | No validation runs | `val_every: 5` unused in `train_paired.py` — loss-only; SSIM/PSNR/Dice Phase 4 TODO |
@@ -155,6 +155,7 @@
 - **2026-10-14 18:30**: 📝 DOCS — push `c5ea231` synced + `guards` green; token/auth map + reboot-relaunch order written to `wiki/09-orchestration/SKILL.md` (GitHub `~/.github_pat` vs `.git_pat` name lesson cost 3 failed pushes; credential helper now wired reboot-safe). Same-issue prevention: `ls ~` first, never guess token filenames
 - **2026-10-15 04:25**: 🚀 overnight +4: ckpt147 (**1.5945** dip toward ep140 best 1.5842) / 148 (1.6239) / 149 (1.6245) / 150 (1.6307) DONE (`150/200 75%`). Sideways band persists but ep147 dip keeps noise-leaning; D **0.7705** healthy. Epoch151 step600 (~32%) RUNNING `PID952` 10.3h ~2.4h/ep steady. 50 left → finish ~Oct-19
 - **2026-10-15 06:25**: ckpt151 DONE **1.6348** (`151/200 75.5%`, sideways band; D **0.7686** healthy). Epoch152 step280 (~15%) RUNNING `PID952` 12.3h ~2.4h/ep steady. 49 left → finish ~Oct-19
+- **2026-10-15 09:18**: ckpt152 DONE **1.6178** (`152/200 76%`, **−0.017** recovering, best move since ep147 dip; D **0.7685** healthy). Epoch153 step720 (~39%) RUNNING `PID952` 15.2h ~2.4h/ep steady. 48 left → finish ~Oct-19
 
 ## How to use tracker
 
