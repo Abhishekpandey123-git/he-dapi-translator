@@ -15,7 +15,7 @@
 
 | Run | Status | Detail |
 |-----|--------|--------|
-| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID952` epoch165/200 from `ckpt164` (`164/200 82%`, ep164 1.5975 +0.029 bounce, D 0.7594 healthy; best ep163 1.5685) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep steady. Watch1011 + keepalive1266 300s. 36 left → finish ~Oct-19. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
+| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID952` epoch166/200 from `ckpt165` (`165/200 82.5%`, ep165 1.6031 +0.006 flat, D 0.7565 healthy; best ep163 1.5685) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep steady. Watch1011 + keepalive1266 300s. 35 left → finish ~Oct-19. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
 | Kaggle | ⬜ CANCELLED, STAND DOWN | stays OFF until GPU quota refreshes |
 | Epoch ground truth | 53/200 done (26.5%) | `checkpoint_epoch53.pt` + `checkpoint_last.pt` Oct-02 18:45 (internal epoch 52); loss 1.8942 |
 | ⚠️ Gap (kept) | No validation runs | `val_every: 5` unused in `train_paired.py` — loss-only; SSIM/PSNR/Dice Phase 4 TODO |
@@ -163,6 +163,7 @@
 - **2026-10-16 09:46**: ckpt162 DONE **1.6099** (`162/200 81%`, +0.003 flat noise; D **0.7769** healthy; best stays ep153 1.5718). Epoch163 step820 (~44%) RUNNING `PID952` 39.6h ~2.4h/ep steady, RAM 57-58%. 38 left → finish ~Oct-19
 - **2026-10-16 12:23**: 🎯 ckpt163 DONE **1.5685 NEW BEST** (beats ep153 1.5718!; D **0.7802** healthy) (`163/200 81.5%`). Epoch164 step800 (~43%) RUNNING `PID952` 42.3h ~2.4h/ep steady, RAM 58-59%. 37 left → finish ~Oct-19
 - **2026-10-16 16:07**: ckpt164 DONE **1.5975** (`164/200 82%`, +0.029 bounce off best as usual; D **0.7594** healthy; best stays ep163 1.5685). Epoch165 step1180 (~64%) RUNNING `PID952` 46h ~2.4h/ep steady, RAM 58-59%. 36 left → finish ~Oct-19
+- **2026-10-16 17:16**: ckpt165 DONE **1.6031** (`165/200 82.5%`, +0.006 flat; D **0.7565** healthy; best stays ep163 1.5685). Epoch166 step80 just started, RUNNING `PID952` 47.2h ~2.4h/ep steady, RAM 58-61%. 35 left → finish ~Oct-19
 
 ## How to use tracker
 
