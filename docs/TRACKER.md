@@ -15,7 +15,7 @@
 
 | Run | Status | Detail |
 |-----|--------|--------|
-| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID952` epoch161/200 from `ckpt160` (`160/200 80%`, 156 1.6144 / 157 1.6115 / 158 1.6112 / 159 1.6175 / 160 1.6095 steady decline, D 0.7614 healthy; best ep153 1.5718) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep steady. Watch1011 + keepalive1266 300s. 40 left → finish ~Oct-19. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
+| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID952` epoch162/200 from `ckpt161` (`161/200 80.5%`, ep161 1.6073 decline continues, D 0.7594 healthy; best ep153 1.5718) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep steady. Watch1011 + keepalive1266 300s. 39 left → finish ~Oct-19. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
 | Kaggle | ⬜ CANCELLED, STAND DOWN | stays OFF until GPU quota refreshes |
 | Epoch ground truth | 53/200 done (26.5%) | `checkpoint_epoch53.pt` + `checkpoint_last.pt` Oct-02 18:45 (internal epoch 52); loss 1.8942 |
 | ⚠️ Gap (kept) | No validation runs | `val_every: 5` unused in `train_paired.py` — loss-only; SSIM/PSNR/Dice Phase 4 TODO |
@@ -159,6 +159,7 @@
 - **2026-10-15 13:49**: 🎯 ckpt153 **1.5718 NEW BEST** (beats ep140 1.5842!) / ckpt154 1.5997 bounce (`154/200 77%`). Epoch155 step560 (~30%) RUNNING `PID952` 19.8h ~2.4h/ep steady. 46 left → finish ~Oct-19
 - **2026-10-15 16:41**: ckpt155 DONE **1.6193** (`155/200 77.5%`, +0.020 uptick sideways; D **0.7683** healthy; best stays ep153 1.5718). Epoch156 step860 (~46%) RUNNING `PID952` 22.6h ~2.4h/ep steady, RAM 56-57% best in a while. 45 left → finish ~Oct-19
 - **2026-10-16 03:56**: 🚀 overnight +5: ckpt156 (1.6144) / 157 (1.6115) / 158 (1.6112) / 159 (1.6175) / 160 (1.6095) DONE (`160/200 80%`, steady decline; D **0.7614** healthy; best stays ep153 1.5718). Epoch161 step740 (~40%) RUNNING `PID952` 33.9h ~2.4h/ep steady. 40 left → finish ~Oct-19
+- **2026-10-16 05:23**: ckpt161 DONE **1.6073** (`161/200 80.5%`, decline continues; D **0.7594** healthy; best stays ep153 1.5718). Epoch162 step40 just started, RUNNING `PID952` 35.4h ~2.4h/ep steady. 39 left → finish ~Oct-19
 
 ## How to use tracker
 
