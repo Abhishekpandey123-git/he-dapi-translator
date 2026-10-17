@@ -15,7 +15,7 @@
 
 | Run | Status | Detail |
 |-----|--------|--------|
-| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID1081` epoch169/200 from `ckpt168` (`168/200 84%`, best ep163 1.5685; 166 1.6039 / 167 1.6199 / 168 1.5934, D 0.7877 volatile) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep steady. Watch1096 + keepalive1099 300s. Fresh RAM 42%, CPU 318%. 32 left → finish ~Oct-19/20. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
+| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID1081` epoch173/200 (`172/200 86%`, **best ep169 1.5302 NEW BEST-EVER**; 170 1.5849 / 171 1.5957 / 172 1.5909 sideways) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep steady. Watch1096 + keepalive1099 300s. RAM 58%. No loss since 05:00 reboot (guard holding). 28 left → finish ~Oct-20. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
 | Kaggle | ⬜ CANCELLED, STAND DOWN | stays OFF until GPU quota refreshes |
 | Epoch ground truth | 168/200 done (84%) | `checkpoint_epoch168.pt` + `checkpoint_last.pt` Oct-17 03:19 (internal epoch 167); loss 1.5934. Reboot 04:52 killed `PID952` mid-epoch169 (~0.6h redone). |
 | ⚠️ Gap (kept) | No validation runs | `val_every: 5` unused in `train_paired.py` — loss-only; SSIM/PSNR/Dice Phase 4 TODO |

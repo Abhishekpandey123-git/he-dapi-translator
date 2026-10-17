@@ -376,12 +376,16 @@
     {
       "date": "2026-10-17",
       "note": "05:00 UTC REBOOT RECOVERY: system reboot 04:52 killed PID952+watch1011+keepalive1266 mid-epoch169 step460 (~25%, ~0.6h redone). Ground truth SAFE 168/200 (168 ckpt files + checkpoint_last.pt verified epoch167/loss 1.5934), no data/tracker loss. RELAUNCHED PID1081 epoch169 resume-auto --optimize-for lowram (loaded ckpt168 start_epoch168) + watch1096 + keepalive1099 300s; fresh RAM 42%, CPU 318%. FIX: installed cron @reboot + */5 logs/boot_launch.sh idempotent supervisor so future reboots auto-recover without manual relaunch (no sudo/linger). 32 left -> finish ~Oct-19/20."
+    },
+    {
+      "date": "2026-10-17",
+      "note": "16:40 UTC post-reboot +4: ckpt169 1.5302 NEW BEST-EVER (beats ep163 1.5685 by -0.038, biggest drop in ~30ep) / 170 1.5849 bounce / 171 1.5957 / 172 1.5909 sideways (pre-drop pattern as after ep140/153/163). Epoch173 step1640 (~88%) RUNNING PID1081 11.6h, pace steady ~2.4h/ep, RAM 58%, reboot-guard holding (no loss since 05:00). 28 left -> finish ~Oct-20."
     }
   ],
   "next_actions": [
-    "WEEK-MODE running: train1081 epoch169 (resume ckpt168) + watch1096 + keepalive1099. Reboot-proof via cron @reboot + */5 logs/boot_launch.sh.",
+    "WEEK-MODE running: train1081 epoch173 (172/200 86%, best ep169 1.5302) + watch1096 + keepalive1099. Reboot-proof via cron @reboot + */5 logs/boot_launch.sh.",
     "kaggle STAND DOWN",
-    "32 remaining: ~77h at 2.4h/ep (finish ~Oct-19/20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
+    "28 remaining: ~67h at 2.4h/ep (finish ~Oct-20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
   ],
   "runs": {
     "local": {
@@ -390,11 +394,11 @@
       "command": "nice -n 10 env PYTHONPATH=. .venv/bin/python -u -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram",
       "log": "logs/train_paired.log",
       "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch168.pt (epoch168 done)",
-      "current_epoch": 169,
+      "current_epoch": 173,
       "total_epochs": 200,
       "started": "2026-10-17T05:00:31Z",
       "supervisor": "logs/boot_launch.sh (cron @reboot + */5) -> logs/keepalive_week.sh (300s) -> train + watch",
-      "note": "2026-10-17 05:00 UTC: REBOOT 04:52 killed PID952 mid-epoch169; SAFE 168/200 (84%, best ep163 1.5685). Relaunched PID1081 epoch169 from ckpt168 (loaded start_epoch168), watch1096 + keepalive1099, fresh RAM 42% CPU 318%. Reboot-proofed via cron @reboot + */5 logs/boot_launch.sh."
+      "note": "2026-10-17 16:40 UTC: 172/200 (86%) done, best ep169 1.5302 NEW BEST-EVER; ep170-172 sideways 1.585-1.596. Epoch173 step1640 (~88%) RUNNING PID1081, watch1096 + keepalive1099, RAM 58%. No loss since reboot (guard holding). 28 left -> finish ~Oct-20."
     },
     "kaggle": {
       "status": "CANCELLED_STAND_DOWN",
@@ -422,5 +426,5 @@
   },
   "tracker_version": "1.0",
   "generated": "2026-10-13T07:00:53.588015Z",
-  "last_verified": "2026-10-17T05:00Z"
+  "last_verified": "2026-10-17T16:40Z"
 }

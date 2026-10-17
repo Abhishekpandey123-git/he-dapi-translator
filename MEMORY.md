@@ -1,6 +1,6 @@
 # MEMORY - H&E <-> DAPI Session Checkpoint 2026-09-27
 
-> Updated 2026-10-17 05:00 UTC: 🔁 REBOOT 04:52 killed PID952 mid-epoch169 step460 (~0.6h redone); ground truth SAFE 168/200 (84%, ep163 best 1.5685). RELAUNCHED PID1081 epoch169 resume-auto --optimize-for lowram + watch1096 + keepalive1099 300s; fresh RAM 42% CPU 318%. NEW: cron `@reboot` + `*/5` `logs/boot_launch.sh` auto-recovers reboots (no sudo/linger). 32 left → finish ~Oct-19/20. CI/CD green (GHCR :staging live). Tracker 45%, Phase2 84%. KAGGLE OFF. Token ONLY at ~/.kaggle/api_token (600).
+> Updated 2026-10-17 16:40 UTC: 🟢 RUNNING 1-WEEK MODE PID1081 epoch173/200 (172/200 86%). Reboot 04:52 killed PID952 mid-epoch169 (~0.6h redone); RESUMED PID1081 from ckpt168. **NEW BEST-EVER ep169 1.5302** (beats ep163 1.5685, -0.038 biggest drop in ~30ep); ep170-172 sideways 1.585-1.596 (pre-drop pattern). pace ~2.4h/ep, RAM 58%, watch1096+keepalive1099 300s + cron `@reboot`+`*/5` `logs/boot_launch.sh` reboot-guard. 28 left → finish ~Oct-20. CI/CD green (GHCR :staging live). Tracker 45%, Phase2 86%. KAGGLE OFF. Token ONLY at ~/.kaggle/api_token (600).
 
 ## Current Status (Updated 2026-10-03 14:43 UTC — syncs with `docs/progress.json:runs` + `docs/TRACKER.md:Live Runs`)
 
