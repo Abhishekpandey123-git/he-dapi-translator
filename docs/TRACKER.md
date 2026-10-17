@@ -7,20 +7,19 @@
 - Verify guards: `PYTHONPATH=. .venv/bin/python tests/test_resource_guards.py` (11 passed 2026-09-19)
 - Tracker JSON: `docs/progress.json` (machine-readable, auto-updated by `src/utils/progress_tracker.py:1`)
 
-## Overall Progress: 45% (Phase 1 done, Phase 2 local 136/200 STOPPED SAFE TO REBOOT + Kaggle OFF)
+## Overall Progress: 45% (Phase 1 done, Phase 2 local 168/200 RUNNING WEEK-MODE + Kaggle OFF)
 
-> **Single truth (2026-10-13 11:07 UTC)**: machine-readable `docs/progress.json:runs` + this section + `MEMORY.md` banner are kept in sync. Tracker 45% (Phase 2 at 68%). Local checkpoint files are ground truth for epoch count. Token lives ONLY at `~/.kaggle/api_token` (chmod 600), never in repo.
+> **Single truth (2026-10-17 05:00 UTC)**: machine-readable `docs/progress.json:runs` + this section + `MEMORY.md` banner are kept in sync. Tracker 45% (Phase 2 at 84%). Local checkpoint files are ground truth for epoch count. Token lives ONLY at `~/.kaggle/api_token` (chmod 600), never in repo.
 
 ## Live Runs (canonical — update here + `progress.json:runs` + `MEMORY.md` together)
 
 | Run | Status | Detail |
 |-----|--------|--------|
-| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID952` epoch169/200 from `ckpt168` (`168/200 84%`, 166 1.6039 / 167 1.6199 / 168 1.5934 +0.013 since 163 best ep163 1.5685, D 0.7877 volatile) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep steady. Watch1011 + keepalive1266 300s. 32 left → finish ~Oct-19. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
+| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID1081` epoch169/200 from `ckpt168` (`168/200 84%`, best ep163 1.5685; 166 1.6039 / 167 1.6199 / 168 1.5934, D 0.7877 volatile) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep steady. Watch1096 + keepalive1099 300s. Fresh RAM 42%, CPU 318%. 32 left → finish ~Oct-19/20. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
 | Kaggle | ⬜ CANCELLED, STAND DOWN | stays OFF until GPU quota refreshes |
-| Epoch ground truth | 53/200 done (26.5%) | `checkpoint_epoch53.pt` + `checkpoint_last.pt` Oct-02 18:45 (internal epoch 52); loss 1.8942 |
+| Epoch ground truth | 168/200 done (84%) | `checkpoint_epoch168.pt` + `checkpoint_last.pt` Oct-17 03:19 (internal epoch 167); loss 1.5934. Reboot 04:52 killed `PID952` mid-epoch169 (~0.6h redone). |
 | ⚠️ Gap (kept) | No validation runs | `val_every: 5` unused in `train_paired.py` — loss-only; SSIM/PSNR/Dice Phase 4 TODO |
-| Epoch ground truth | 18/200 done (9%) | `checkpoint_epoch18.pt` + `checkpoint_last.pt` Sep-28 13:07; ⚠️ local+kaggle forked since epoch15 — newest `checkpoint_last.pt` wins at reconcile |
-| Fixes this session | v5 no-src race → v6 subdir-drop (remote had 4 files) → zip `code_bundle.zip` (Kaggle extracts to `code_bundle/` prefix) → v7 blob-miss → v8 merge-up fix | script now: newest-ckpt resume + unzip/merge + fail-fast `sys.exit(2)` |
+| Reboot-proofing (new) | cron `@reboot` + `*/5` → `logs/boot_launch.sh` | Idempotent flock-guarded supervisor relaunches keepalive→train+watch if dead; no sudo/linger. Supersedes manual reboot relaunch. |
 
 | Phase | Name | Status | % | Artifacts | Optimization enforced |
 |-------|------|--------|---|-----------|----------------------|

@@ -51,8 +51,9 @@ git push origin main   # must print "main -> main"; if "Authentication failed", 
 ```
 
 ## Reboot recovery (week-mode relaunch order — lesson 2026-10-14)
+0. **Auto (since 2026-10-17)**: cron `@reboot` + `*/5` runs `logs/boot_launch.sh` (idempotent, flock-guarded). It relaunches `keepalive_week.sh` → train + watch if dead, so reboots recover with no manual step. Install: `crontab <(printf '@reboot /bin/bash %s/logs/boot_launch.sh\n*/5 * * * * /bin/bash %s/logs/boot_launch.sh\n' "$PWD" "$PWD")`. Verify: `tail -5 logs/boot.log`.
 1. Ground truth = `resources/models/checkpoints/he2dapi/checkpoint_epoch*.pt` count + `checkpoint_last.pt` (`torch.load` → `epoch`/`loss`); tracker files are secondary.
-2. Relaunch train FIRST: `setsid nohup nice -n 10 env PYTHONPATH=. .venv/bin/python -u -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram >> logs/train_paired.log 2>&1 < /dev/null &` — confirm `step20` line appears (~4 min).
+2. Manual fallback — relaunch train FIRST: `setsid nohup nice -n 10 env PYTHONPATH=. .venv/bin/python -u -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram >> logs/train_paired.log 2>&1 < /dev/null &` — confirm `step20` line appears (~4 min). Or just run `bash logs/boot_launch.sh`.
 3. Then watch (`setsid nohup bash watch_runs.sh ...`, pid → `logs/watch.pid`) + keepalive (`setsid nohup bash logs/keepalive_week.sh ...`, pid → `logs/keepalive.pid`).
 4. Keepalive restarts BOTH train and watch if dead (watch-guard added 2026-10-14 after watch died silently 1h pre-reboot). After editing it, kill + relaunch keepalive to reload.
 5. Sync triple: `docs/progress.json:runs` + `docs/TRACKER.md` (Live Runs + Daily Log) + `MEMORY.md` banner, then commit + push (auth above).

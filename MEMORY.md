@@ -1,6 +1,6 @@
 # MEMORY - H&E <-> DAPI Session Checkpoint 2026-09-27
 
-> Updated 2026-10-17 03:37 UTC: 🟢 RUNNING 1-WEEK MODE PID952 epoch169/200 from ckpt168 (168/200 84%, 166 1.6039 / 167 1.6199 / 168 1.5934 +0.013 since 163 best ep163 1.5685, D 0.7877 volatile). Overnight +3 ~2.4h/ep, RAM 56%, watch1011+keepalive1266 300s. 32 left → finish ~Oct-19. CI/CD green (GHCR :staging live). Tracker 45%, Phase2 84%. KAGGLE OFF. Token ONLY at ~/.kaggle/api_token (600).
+> Updated 2026-10-17 05:00 UTC: 🔁 REBOOT 04:52 killed PID952 mid-epoch169 step460 (~0.6h redone); ground truth SAFE 168/200 (84%, ep163 best 1.5685). RELAUNCHED PID1081 epoch169 resume-auto --optimize-for lowram + watch1096 + keepalive1099 300s; fresh RAM 42% CPU 318%. NEW: cron `@reboot` + `*/5` `logs/boot_launch.sh` auto-recovers reboots (no sudo/linger). 32 left → finish ~Oct-19/20. CI/CD green (GHCR :staging live). Tracker 45%, Phase2 84%. KAGGLE OFF. Token ONLY at ~/.kaggle/api_token (600).
 
 ## Current Status (Updated 2026-10-03 14:43 UTC — syncs with `docs/progress.json:runs` + `docs/TRACKER.md:Live Runs`)
 
@@ -173,6 +173,7 @@ python src/models/train_unpaired.py --config configs/cyclegan_dapi2he.yaml --res
 - Env: `/tmp/he-venv/bin/python` (h5py ok, torch not installed yet, needs `pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu`)
 - Tests: `tests/test_imports.py:1` smoke tests (tiling, datasets, infer)
 - Tokens/auth (reboot-safe, lesson 2026-10-14): GitHub `~/.github_pat`, Kaggle `~/.kaggle/api_token`, HF `~/.hf_token` (all 600, home dir, never in repo) + `git credential.helper` wired to `~/.github_pat`. Full map + reboot-relaunch order: `wiki/09-orchestration/SKILL.md:Token`.
+- Reboot auto-recovery (lesson 2026-10-17): cron `@reboot` + `*/5` runs `logs/boot_launch.sh` (idempotent, flock-guarded) which relaunches keepalive→train+watch if dead. Supersedes manual reboot relaunch; survives reboots with no sudo/linger.
 
 ## Links
 - HEMIT paper: https://arxiv.org/html/2403.18501v1 | Mendeley: 3gx53zm49d
