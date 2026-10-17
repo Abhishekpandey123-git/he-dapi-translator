@@ -40,7 +40,7 @@
       "id": 2,
       "name": "Modeling (W4-8) Dual Track",
       "status": "IN_PROGRESS",
-      "percent": 82,
+      "percent": 84,
       "artifacts": [
         "configs/hemit_dual_branch.yaml lowram",
         "src/models/train_paired.py grad_accum + D-loss/component logging",
@@ -368,12 +368,16 @@
     {
       "date": "2026-10-16",
       "note": "17:16 UTC ckpt165 DONE 1.6031 (165/200 82.5%, +0.006 flat; D 0.7565 healthy; best stays ep163 1.5685). Epoch166 step80 just started, RUNNING PID952 47.2h ~2.4h/ep steady, RAM 58-61%. 35 left."
+    },
+    {
+      "date": "2026-10-17",
+      "note": "03:37 UTC overnight +3: ckpt166 (1.6039) / 167 (1.6199) / 168 (1.5934) DONE (168/200 84%, +0.013 since 163 best ep163 1.5685; D 0.7877 volatile). Epoch169 step40 just started, RUNNING PID952 4h ~2.4h/ep steady, RAM 56%"
     }
   ],
   "next_actions": [
-    "WEEK-MODE running: train952 epoch166 (resume ckpt165) + watch1011 + keepalive1266. ckpt166 ETA ~19:30 UTC.",
+    "WEEK-MODE running: train952 epoch168 (resume ckpt168) + watch1011 + keepalive1266. ckpt168 ETA ~06:00 UTC.",
     "kaggle STAND DOWN",
-    "54 remaining: ~130h at 2.4h/ep (finish ~Oct-19/20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
+    "37 remaining: ~90h at 2.4h/ep (finish ~Oct-19/20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
   ],
   "runs": {
     "local": {
@@ -381,11 +385,11 @@
       "pid": 952,
       "command": "nice -n 10 env PYTHONPATH=. .venv/bin/python -u -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram",
       "log": "logs/train_paired.log",
-      "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch165.pt (epoch165 done)",
-      "current_epoch": 166,
+      "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch168.pt (epoch168 done)",
+      "current_epoch": 169,
       "total_epochs": 200,
       "started": "2026-09-28T02:45Z",
-      "note": "2026-10-16 17:16 UTC: ckpt165 DONE 1.6031 (165/200 82.5%, +0.006 flat; D 0.7565 healthy; best stays ep163 1.5685). Epoch166 step80 just started, RUNNING PID952 47.2h ~2.4h/ep steady, RAM 58-61%. 35 left -> finish ~Oct-19."
+      "note": "2026-10-17 03:37 UTC: overnight +3: ckpt166 (1.6039) / 167 (1.6199) / 168 (1.5934) DONE (168/200 84%, +0.013 since 163 best ep163 1.5685; D 0.7877 volatile). Epoch169 step40 just started, RUNNING PID952 4h ~2.4h/ep steady, RAM 56%."
     },
     "kaggle": {
       "status": "CANCELLED_STAND_DOWN",
