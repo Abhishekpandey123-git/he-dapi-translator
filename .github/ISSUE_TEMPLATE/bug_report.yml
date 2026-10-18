@@ -1,0 +1,50 @@
+name: 🐛 Bug report
+description: Something is broken (inference, training, backend, Docker, CI).
+title: "[bug] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for the report! Please keep it low-RAM reproducible — this project runs on a 3.7GB CPU-only box."
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us what you expected to happen.
+      placeholder: "Running `infer.py` on a 512px PNG produced a black image..."
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. command...
+        2. ...
+      validations:
+        required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - inference (patch)
+        - inference (WSI / streaming)
+        - training (paired)
+        - training (unpaired / CycleGAN)
+        - data pipeline (pack / h5)
+        - backend API
+        - docker / CI-CD
+        - docs
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      placeholder: "OS, Python, torch, RAM, GPU (none), command used"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / traceback
+      render: shell

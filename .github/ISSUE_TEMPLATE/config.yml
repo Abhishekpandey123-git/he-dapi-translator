@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 Questions & ideas (Discussions)
+    url: https://github.com/urbiologicalpa/he-dapi-translator/discussions
+    about: Ask questions, share results, or discuss ideas before opening an issue.
+  - name: 📈 Live training status
+    url: https://github.com/urbiologicalpa/he-dapi-translator/blob/main/docs/progress.json
+    about: Current epoch, loss, and run state (machine-readable, synced each milestone).

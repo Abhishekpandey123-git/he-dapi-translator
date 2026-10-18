@@ -1,0 +1,43 @@
+name: ✨ Feature request
+description: Suggest an idea, model improvement, or roadmap item.
+title: "[feat] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+      description: What are you trying to do, and why is it hard today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - model / architecture
+        - data
+        - inference / WSI
+        - backend / API
+        - frontend / UX
+        - CI-CD / infra
+        - docs
+    validations:
+      required: true
+  - type: checkboxes
+    id: lowram
+    attributes:
+      label: Low-RAM constraint
+      options:
+        - label: This can run within the 3.7GB / no-GPU budget (streaming, batch≤2)
+        - label: This NEEDS a bigger machine or GPU (explain below)
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
