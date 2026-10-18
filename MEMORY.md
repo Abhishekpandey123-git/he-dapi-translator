@@ -1,6 +1,6 @@
 # MEMORY - H&E <-> DAPI Session Checkpoint 2026-09-27
 
-> Updated 2026-10-18 10:02 UTC: 🟢 RUNNING 1-WEEK MODE PID1081 epoch181/200 (180/200 **90%**). Reboot 04:52 Oct-17 recovered (PID1081 from ckpt168); **NEW BEST-EVER ep169 1.5302** (beats ep163 1.5685, -0.038); ep178-180 sideways 1.587-1.591 easing (pre-drop pattern). pace ~2.4h/ep, RAM 58%, uptime 1d5h stable, watch1096+keepalive1099 300s + cron `@reboot`+`*/5` `logs/boot_launch.sh` reboot-guard. 20 left → finish ~Oct-20. CI/CD green (GHCR :staging live). Tracker 45%, Phase2 90%. KAGGLE OFF. Token ONLY at ~/.kaggle/api_token (600).
+> Updated 2026-10-18 13:45 UTC: 🟢 RUNNING PID1081 epoch181→182/200 (~90%). **ENGAGEMENT SHIPPED**: GitHub **Release v0.1.0** + prod promote live (GHCR `:v0.1.0`+`:latest` on sha d36922c); **HF model repo + FREE Static Space (in-browser ONNX) demo live**; GitHub Pages live. Fixed cd-production (tag-push-only trigger + pinned checkout — release-event `fetch-tags` broke checkout). CI/CD green. ~18 left → ~Oct-20, pace ~2.4h/ep, best ep169 1.5302. KAGGLE OFF. Tokens at `~/.github_pat`, `~/.hf_token` (both 600).
 
 ## Current Status (Updated 2026-10-03 14:43 UTC — syncs with `docs/progress.json:runs` + `docs/TRACKER.md:Live Runs`)
 

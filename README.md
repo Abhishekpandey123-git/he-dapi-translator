@@ -12,6 +12,16 @@ Bi-directional virtual staining for histopathology: **H&E (RGB) ↔ DAPI (graysc
 |---|---|
 | ![H&E](data/examples/he_example.png) | ![DAPI](data/examples/dapi_example.png) |
 
+## 🔬 Live demo
+
+Try the trained model **in your browser** — no install, inference runs client-side via ONNX Runtime Web:
+
+[![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Live%20Space-blue)](https://huggingface.co/spaces/urbiologicalpa/he-dapi-translator) [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Weights-yellow)](https://huggingface.co/urbiologicalpa/he-dapi-translator)
+
+- **Space (demo):** https://huggingface.co/spaces/urbiologicalpa/he-dapi-translator
+- **Weights (model card):** https://huggingface.co/urbiologicalpa/he-dapi-translator
+- **Container:** `ghcr.io/urbiologicalpa/he-dapi-translator:latest` (also `:v0.1.0`)
+
 ## 🔨 Build progress (live training — 181/200 epochs)
 
 | Metric | Value | Detail |
