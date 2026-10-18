@@ -1,0 +1,36 @@
+# Build context excludes — keeps image small and FAST (CI context was fine only
+# because checkpoints are gitignored; local builds would otherwise ship 14GB).
+# NOTE: data/examples/ and tracked resources/ files are intentionally KEPT.
+
+# VCS / env / caches
+.git/
+.gitignore
+.github/
+.venv/
+.pytest_cache/
+__pycache__/
+*.pyc
+
+# secrets / local only
+private/
+
+# heavy runtime artifacts (model weights, datasets) — never bake into image
+logs/
+notebooks/
+wiki/
+docs/
+data/raw/
+data/processed/
+resources/models/checkpoints/
+.tmp_kaggle_code/
+.tmp_kaggle_hemit_product/
+.tmp_kaggle_small/
+
+# large binary data
+*.pt
+*.onnx
+*.h5
+*.hdf5
+*.svs
+*.7z
+*.zip

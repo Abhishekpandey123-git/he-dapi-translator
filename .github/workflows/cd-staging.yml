@@ -1,7 +1,10 @@
 name: cd-staging
 
-# Stage 2 — STAGING: push to `staging` branch builds ONE immutable image
-# (tag = git SHA) -> GHCR :sha + :staging, then smoke-tests /health.
+# Stage 2 — STAGING: push to `staging` (UAT) or `main` (code changes only,
+# paths-filtered) builds ONE immutable image (tag = git SHA) -> GHCR :sha +
+# :staging, then smoke-tests /health. Paths filter means doc/ckpt-only training
+# syncs do NOT rebuild, but any change to docker/src/resources/.dockerignore does
+# — so :staging stays fresh and the Docker build is continuously validated.
 # Mirrors standard ML stages: Build -> Staging (UAT) -> promote to Production.
 # Refs: junyanz/pytorch-CycleGAN-and-pix2pix docker pattern (prebuilt image +
 # nvidia-docker run), timbrooks/instruct-pix2pix + biohub/dynacell HF Spaces
@@ -11,7 +14,14 @@ name: cd-staging
 # staging -> production).
 on:
   push:
-    branches: [staging]
+    branches: [main, staging]
+    paths:
+      - "docker/**"
+      - "src/**"
+      - "resources/**"
+      - "data/examples/**"
+      - ".dockerignore"
+      - ".github/workflows/cd-staging.yml"
   workflow_dispatch:
 
 concurrency:
