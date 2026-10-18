@@ -25,6 +25,8 @@ logs/*.pid
 logs/*.flag
 *.flag
 nohup.out
+# Live profiling snapshot rewritten every training step (kept on disk, not tracked)
+wiki/06-training/profile_*.json
 # Secrets (never commit) — HF/GH/Docker tokens live outside repo
 .env
 *.pat
