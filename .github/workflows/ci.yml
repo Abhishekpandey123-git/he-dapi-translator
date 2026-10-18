@@ -6,6 +6,7 @@ on:
   push:
     branches: [main, staging]
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -37,3 +38,23 @@ jobs:
         run: |
           pip install fastapi httpx python-multipart
           PYTHONPATH=. python -c "from src.backend.main import app; from fastapi.testclient import TestClient; c=TestClient(app); r=c.get('/health'); assert r.status_code==200, r.text; print('HEALTH_OK', r.json())"
+
+  packages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install CPU torch + he-dapi (editable, no deps auto-resolve)
+        run: |
+          pip install --index-url https://download.pytorch.org/whl/cpu torch
+          pip install --no-deps -e ./packages/he-dapi
+          pip install numpy pillow huggingface_hub pyyaml pytest build
+      - name: he-dapi + napari plugin tests
+        run: pytest packages/he-dapi/tests packages/napari-he-dapi/tests -v
+      - name: Build both wheels (packaging regression)
+        run: |
+          python -m build --wheel packages/he-dapi --outdir /tmp/dist
+          python -m build --wheel packages/napari-he-dapi --outdir /tmp/dist
+          ls -la /tmp/dist
