@@ -2,7 +2,100 @@
 
 Bi-directional virtual staining for histopathology: **H&E (RGB) ↔ DAPI (grayscale)**, for single patches and whole-slide images (WSI). Paired Pix2Pix + unpaired CycleGAN, FastAPI backend, drag-and-drop frontend, Docker deploy.
 
-![stack](https://img.shields.io/badge/PyTorch-2.14%20CPU-orange) [![guards](https://github.com/urbiologicalpa/he-dapi-translator/actions/workflows/ci.yml/badge.svg)](https://github.com/urbiologicalpa/he-dapi-translator/actions) [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE) [![python](https://img.shields.io/badge/python-3.10%2B-blue)](pyproject.toml) [![PyPI](https://img.shields.io/pypi/v/he-dapi?label=pip%20install%20he-dapi)](https://pypi.org/project/he-dapi/) [![napari plugin](https://img.shields.io/badge/napari-he--dapi-blueviolet)](https://pypi.org/project/napari-he-dapi/) ![trained on](https://img.shields.io/badge/trained%20on-3.7GB%20CPU-critical) ![building](https://img.shields.io/badge/status-actively%20building-orange) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)](CONTRIBUTING.md)
+![stack](https://img.shields.io/badge/PyTorch-2.14%20CPU-orange) [![guards](https://github.com/urbiologicalpa/he-dapi-translator/actions/workflows/ci.yml/badge.svg)](https://github.com/urbiologicalpa/he-dapi-translator/actions) [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE) [![python](https://img.shields.io/badge/python-3.10%2B-blue)](pyproject.toml) ![trained on](https://img.shields.io/badge/trained%20on-3.7GB%20CPU-critical) ![building](https://img.shields.io/badge/status-actively%20building-orange) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)](CONTRIBUTING.md)
+
+
+## Quickstart
+
+Choose either the local Python environment or Docker. The commands below use the bundled example image.
+
+### Option A: Local Python environment (CPU)
+
+Requirements: Python 3.10+ and Git. Run these commands from a terminal:
+
+```bash
+git clone https://github.com/urbiologicalpa/he-dapi-translator.git
+cd he-dapi-translator
+python -m venv .venv
+```
+
+Activate the environment, then install CPU PyTorch and the project dependencies.
+
+**Linux / macOS (bash or zsh):**
+
+```bash
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install torch==2.3.0 torchvision==0.18.0 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r docker/requirements.txt
+```
+
+**Windows PowerShell:**
+
+```powershell
+.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install torch==2.3.0 torchvision==0.18.0 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r docker/requirements.txt
+$env:PYTHONPATH = "."
+python src/models/infer.py --input data/examples/he_example.png --direction he2dapi --out output/synth.png
+```
+
+On Linux/macOS, run the example inference command with the repository root on `PYTHONPATH`:
+
+```bash
+mkdir -p output
+PYTHONPATH=. python src/models/infer.py --input data/examples/he_example.png --direction he2dapi --out output/synth.png
+```
+
+For whole-slide images, use the streaming mode and provide a local slide path, for example:
+
+```bash
+PYTHONPATH=. python src/models/infer.py --input data/raw/wsi/CMU-1.svs --direction he2dapi --wsi --stream --out output/wsi.tiff
+```
+
+### Option B: Docker inference
+
+Requirements: Docker installed and running. This uses the published image and writes the output to the host's `output/` directory. Run from the repository root (or a directory containing an `output/` folder):
+
+```bash
+mkdir -p output
+docker run --rm \
+  -v "$PWD/output:/output" \
+  ghcr.io/urbiologicalpa/he-dapi-translator:latest \
+  python src/models/infer.py \
+    --input /app/data/examples/he_example.png \
+    --direction he2dapi \
+    --out /output/synth.png
+```
+
+The command after the image name overrides the image's default FastAPI-server command and runs the inference script instead. The image includes `data/examples/he_example.png`; see [`docker/Dockerfile`](docker/Dockerfile) and [`docker/`](docker/) for the container setup.
+
+To start the API server instead, use:
+
+```bash
+docker run --rm -p 8000:8000 ghcr.io/urbiologicalpa/he-dapi-translator:latest
+```
+
+Then check `http://localhost:8000/health`.
+
+### Important: trained model weights
+
+The commands above exercise the inference pipeline, but **they do not guarantee trained-model predictions** unless a compatible checkpoint or ONNX file is available and supplied. The current inference script can fall back to an untrained model or a simple dummy transform when weights are missing. Download and review the compatible weights from the [Hugging Face model page](https://huggingface.co/urbiologicalpa/he-dapi-translator), then pass the local file with `--checkpoint /path/to/checkpoint.pt` or `--onnx /path/to/model.onnx`. The Docker image excludes local checkpoint files, so mount the downloaded weights into the container before passing their container path.
+
+### More development commands
+
+```bash
+# Resumable training (requires the training dataset and configuration)
+PYTHONPATH=. python -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram
+
+# Tracker and resource guards
+PYTHONPATH=. python -m src.utils.progress_tracker --check
+PYTHONPATH=. python -m src.utils.progress_tracker --enforce
+PYTHONPATH=. python tests/test_resource_guards.py
+```
+
+Training configuration examples are in [`configs/`](configs/).
 
 > 🚧 **Actively building in public** — model training live (**181/200 epochs**, 90.5%), roadmap in [Issues](https://github.com/urbiologicalpa/he-dapi-translator/issues), milestones as [Releases](https://github.com/urbiologicalpa/he-dapi-translator/releases). Contributors welcome — start with [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -68,27 +161,6 @@ Every stage profiled with `src/utils/resource_monitor.py`, every spike fixed by 
 
 A Kaggle T4 offload was attempted, measured (CPU-only quota, 2.8h/ep — *slower* than local), and stood down with a written post-mortem instead of sunk cost. Process notes: [`wiki/`](wiki/) (9 optimization tracks), [`docs/optimization/REPORT.md`](docs/optimization/REPORT.md).
 
-## Quick start
-
-```bash
-# env (CPU)
-uv pip install --python .venv/bin/python torch torchvision --index-url https://download.pytorch.org/whl/cpu
-uv pip install -r docker/requirements.txt  # or: pip install -e ".[lowram]"
-
-# inference (patch + streaming WSI)
-PYTHONPATH=. .venv/bin/python src/models/infer.py --input data/examples/he_example.png --direction he2dapi --out /tmp/synth.png
-PYTHONPATH=. .venv/bin/python src/models/infer.py --input data/raw/wsi/CMU-1.svs --direction he2dapi --wsi --stream --out /tmp/wsi.tiff
-
-# training (resumable — safe to kill and rerun)
-PYTHONPATH=. .venv/bin/python -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram
-
-# tracker + guards
-PYTHONPATH=. .venv/bin/python -m src.utils.progress_tracker --check
-PYTHONPATH=. .venv/bin/python -m src.utils.progress_tracker --enforce
-PYTHONPATH=. .venv/bin/python tests/test_resource_guards.py
-```
-
-Docker: `docker build -t he-dapi-translator -f docker/Dockerfile .` (see [`docker/`](docker/)). Staging image published to `ghcr.io/urbiologicalpa/he-dapi-translator:staging`.
 
 ## Layout
 
