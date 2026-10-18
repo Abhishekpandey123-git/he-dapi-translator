@@ -388,13 +388,18 @@
     {
       "date": "2026-10-18",
       "note": "13:45 UTC ENGAGEMENT SHIPPED: GitHub Release v0.1.0 + prod promote live (GHCR :v0.1.0 + :latest on sha d36922c). Fixed cd-production: tag-push-only trigger + pinned checkout (release-event `fetch-tags:true` broke checkout 'Cannot fetch both <sha> and refs/tags/vX'); approved prod env via API; promote run 39131429427 SUCCESS. HF: model repo urbiologicalpa/he-dapi-translator (generator state_dict ep169) + FREE Static Space in-browser ONNX demo (Gradio Spaces need HF PRO now). Training PID1081 continuous, epoch181->182."
+    },
+    {
+      "date": "2026-10-18",
+      "note": "15:05 UTC PACKAGING SHIPPED: he-dapi v0.1.0 + napari-he-dapi v0.1.0 published to PyPI (uv publish, token at ~/.pypi_token). Library+CLI (he_dapi) and npe2 napari plugin, weights auto-pulled from HF. Tests added (packages/*/tests, tests/test_training_dummy.py @slow) + CI 'packages' job + manual/weekly training-smoke workflow. Training PID1081 unaffected."
     }
   ],
   "next_actions": [
-    "WEEK-MODE running: train1081 epoch181->182 (best ep169 1.5302) + watch1096 + keepalive1099. Reboot-proof via cron @reboot + */5 logs/boot_launch.sh.",
+    "WEEK-MODE running: train1081 epoch181->182 (best ep169 1.5302). Reboot-proof via cron.",
     "kaggle STAND DOWN",
-    "HF DONE: Space https://huggingface.co/spaces/urbiologicalpa/he-dapi-translator + model https://huggingface.co/urbiologicalpa/he-dapi-translator. GitHub Pages live.",
-    "~18 remaining @2.4h/ep -> finish ~Oct-20. Optional: wire cd-staging HF sync step; export epoch200 ONNX and refresh Space weights at completion."
+    "PyPI DONE: pip install he-dapi ; pip install napari-he-dapi (v0.1.0). Bump version before republish.",
+    "~18 remaining @2.4h/ep -> finish ~Oct-20. Then v1.0 (backend+frontend) + launch.",
+    "TODO: rotate PyPI token (was shared in chat); configure trusted publishing to drop the token."
   ],
   "runs": {
     "local": {
@@ -435,5 +440,5 @@
   },
   "tracker_version": "1.0",
   "generated": "2026-10-13T07:00:53.588015Z",
-  "last_verified": "2026-10-18T13:45Z"
+  "last_verified": "2026-10-18T15:05Z"
 }
