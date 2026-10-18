@@ -1,6 +1,6 @@
 # MEMORY - H&E <-> DAPI Session Checkpoint 2026-09-27
 
-> Updated 2026-10-18 13:45 UTC: 🟢 RUNNING PID1081 epoch181→182/200 (~90%). **ENGAGEMENT SHIPPED**: GitHub **Release v0.1.0** + prod promote live (GHCR `:v0.1.0`+`:latest` on sha d36922c); **HF model repo + FREE Static Space (in-browser ONNX) demo live**; GitHub Pages live. Fixed cd-production (tag-push-only trigger + pinned checkout — release-event `fetch-tags` broke checkout). CI/CD green. ~18 left → ~Oct-20, pace ~2.4h/ep, best ep169 1.5302. KAGGLE OFF. Tokens at `~/.github_pat`, `~/.hf_token` (both 600).
+> Updated 2026-10-18 15:05 UTC: 🟢 RUNNING PID1081 epoch182/200 (~91%). **ALL SHIPPED**: GitHub **Release v0.1.0** + prod promote (GHCR `:v0.1.0`+`:latest`); **HF model repo + FREE Static Space (in-browser ONNX) demo**; GitHub Pages; **PyPI packages `he-dapi` + `napari-he-dapi` v0.1.0** (`pip install he-dapi`); package + dummy-training tests in CI. Fixed cd-production (tag-push-only trigger + pinned checkout). ~17 left → ~Oct-20, pace ~2.4h/ep, best ep169 1.5302. KAGGLE OFF. Tokens: `~/.github_pat`, `~/.hf_token`, `~/.pypi_token` (all 600).
 
 ## Current Status (Updated 2026-10-03 14:43 UTC — syncs with `docs/progress.json:runs` + `docs/TRACKER.md:Live Runs`)
 
