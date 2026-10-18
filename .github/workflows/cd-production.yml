@@ -1,15 +1,15 @@
 name: cd-production
 
-# Stage 3 — PRODUCTION: tag push v*.*.* on `main` promotes the SAME SHA image
-# (:staging -> :<version> + :latest), mirrors to Docker Hub (optional), and
-# attaches ONNX + metrics to the GitHub Release. Requires `staging` success
-# on the same SHA + `production` environment approval (required reviewers).
+# Stage 3 — PRODUCTION: tag push v*.*.* promotes the SAME SHA image
+# (:staging -> :<version> + :latest) and attaches ONNX + metrics to the GitHub
+# Release. Requires `production` environment approval (required reviewers).
 # Rollback = re-tag previous v* (immutable SHAs, never overwrite :latest by hand).
+# NOTE (2026-10-18): trigger is tag-push ONLY — adding `release: published` too
+# caused duplicate runs, and `fetch-tags: true` broke checkout on release events
+# ("Cannot fetch both <sha> and refs/tags/vX"). Checkout now pins `ref: tag`.
 on:
   push:
     tags: ["v*.*.*"]
-  release:
-    types: [published]
   workflow_dispatch:
 
 concurrency:
@@ -30,7 +30,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-tags: true
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
@@ -55,9 +56,11 @@ jobs:
           echo "Post-deploy: verify tags exist, then run hosted /health against prod URL."
           echo "Prod URL placeholder: set PROD_URL repo variable (HF Space or VM) to enable live poll."
       - name: Attach release artifacts (ONNX + metrics, if present)
-        if: github.event_name == 'release'
+        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ github.ref_name }}
+          fail_on_unmatched_files: false
           files: |
             docs/metrics_eval.json
             resources/models/checkpoints/he2dapi/*.onnx
