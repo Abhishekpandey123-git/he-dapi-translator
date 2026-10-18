@@ -60,3 +60,20 @@ git push origin main   # must print "main -> main"; if "Authentication failed", 
 
 ## Wiki skill invocation
 Each folder `wiki/0X-*/SKILL.md` is agent prompt. To re-apply: `cat wiki/0X-*/SKILL.md` + edit linked file.
+
+## CI/CD (GitHub Actions → GHCR) — audit/fix 2026-10-18
+Repo `urbiologicalpa/he-dapi-translator`, image `ghcr.io/urbiologicalpa/he-dapi-translator`.
+
+| Workflow | Trigger | Output |
+|----------|---------|--------|
+| `guards` (`ci.yml`) | push `main`/`staging`, PRs | secret-scan, low-RAM enforce, `tests/test_resource_guards.py`, backend `/health` smoke |
+| `cd-staging` (`cd-staging.yml`) | push `main`/`staging` **paths-filtered** (`docker/**`,`src/**`,`resources/**`,`data/examples/**`,`.dockerignore`,workflow) + `workflow_dispatch` | build immutable `:$(git SHA)` + `:staging` → GHCR, smoke `/health`+`/models` |
+| `cd-production` (`cd-production.yml`) | tag `v*.*.*`, release, `workflow_dispatch` | promote same SHA → `:version` + `:latest`; **requires `production` env approval** |
+
+**Rules / lessons:**
+- `.dockerignore` excludes `resources/models/checkpoints` (14GB!), `data/raw|processed`, `.git`, `.venv`, `logs`, `wiki`, `docs`, `*.pt/h5/svs/7z`. CI was only fast because checkpoints are gitignored — never remove this file or local/CI builds balloon.
+- Training-sync commits (docs/ckpt only) do **not** trigger `cd-staging` (paths filter) → no wasted heavy builds. Code/docker changes do.
+- `main` branch protection: force-push + deletion blocked, `resource-guards` check required for PRs (direct pushes from the training loop still work). Set via API 2026-10-18.
+- Refresh staging image now: `curl -X POST -H "Authorization: Bearer $(cat ~/.github_pat)" .../actions/workflows/cd-staging.yml/dispatches -d '{"ref":"main"}'`. Verify tag: `GET /users/urbiologicalpa/packages/container/he-dapi-translator/versions`.
+- Release: `git tag vX.Y.Z && git push origin vX.Y.Z`, then approve the `production` environment in the Actions UI. GHCR serves images; no registry creds in repo (`secrets.GITHUB_TOKEN`).
+- No `gh` CLI on this box — use the REST API with `~/.github_pat` (`repo`+`workflow`+`write:packages` scopes).

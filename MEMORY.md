@@ -174,6 +174,7 @@ python src/models/train_unpaired.py --config configs/cyclegan_dapi2he.yaml --res
 - Tests: `tests/test_imports.py:1` smoke tests (tiling, datasets, infer)
 - Tokens/auth (reboot-safe, lesson 2026-10-14): GitHub `~/.github_pat`, Kaggle `~/.kaggle/api_token`, HF `~/.hf_token` (all 600, home dir, never in repo) + `git credential.helper` wired to `~/.github_pat`. Full map + reboot-relaunch order: `wiki/09-orchestration/SKILL.md:Token`.
 - Reboot auto-recovery (lesson 2026-10-17): cron `@reboot` + `*/5` runs `logs/boot_launch.sh` (idempotent, flock-guarded) which relaunches keepalive→train+watch if dead. Supersedes manual reboot relaunch; survives reboots with no sudo/linger.
+- CI/CD (audited 2026-10-18): `guards` green on every push; `cd-staging` now also builds on `main` (paths-filtered docker/src/resources) so `:staging` stays fresh (refreshed to `d36922c` Oct-18); `.dockerignore` added (excludes 14GB checkpoints); `main` protected (no force-push/delete, `resource-guards` required for PRs); `cd-production` promotes via `v*.*.*` tag + prod-env approval (untested — dry-run pending). Full runbook: `wiki/09-orchestration/SKILL.md` CI/CD section.
 
 ## Links
 - HEMIT paper: https://arxiv.org/html/2403.18501v1 | Mendeley: 3gx53zm49d
