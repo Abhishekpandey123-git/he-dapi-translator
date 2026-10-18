@@ -80,7 +80,8 @@ Metrics (see `resources/models/README.md`):
 - [ ] Auto QC: check input H&E distribution vs training distribution (reject out-of-distribution), return confidence heatmap from discriminator
 
 **Plugin variants (stretch, after web MVP):**
-- [ ] napari plugin: `napari-he-dapi` widget using VisCy pattern (see napari-tmidas docs) - reuse backend via `viscy_virtual_staining` style API
+- [x] napari plugin: `napari-he-dapi` scaffolded in `packages/napari-he-dapi` (npe2 manifest + magicgui widget reusing `he-dapi`)
+- [x] PyPI package: `he-dapi` (library + CLI) in `packages/he-dapi`; publish flow in `.github/workflows/publish-pypi.yml` + `docs/PUBLISHING.md`
 - [ ] QuPath extension (Groovy) + ImageJ macro
 
 ### Phase 4 — Validation & Hardening (Week 10-11)

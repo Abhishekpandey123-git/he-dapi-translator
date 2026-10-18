@@ -1,0 +1,12 @@
+name: napari-he-dapi
+display_name: H&E <-> DAPI Virtual Staining
+visibility: public
+categories: ["Image Processing"]
+contributions:
+  commands:
+    - id: napari-he-dapi.translate
+      title: Translate H&E <-> DAPI
+      python_name: napari_he_dapi._widget:translate
+  widgets:
+    - command: napari-he-dapi.translate
+      display_name: H&E <-> DAPI

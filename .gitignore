@@ -4,6 +4,9 @@ __pycache__/
 .pytest_cache/
 node_modules/
 dist/
+*.egg-info/
+build/
+.ruff_cache/
 mlruns/
 # Data & artefacts (GB-scale, never push to GitHub)
 data/raw/

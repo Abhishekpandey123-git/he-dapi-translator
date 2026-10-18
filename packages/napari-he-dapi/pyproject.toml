@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "napari-he-dapi"
+version = "0.1.0"
+description = "napari plugin: H&E <-> DAPI virtual staining (runs the he-dapi model in the viewer)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "urbiologicalpa" }]
+keywords = ["napari", "napari-plugin", "histopathology", "virtual-staining", "dapi", "he"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Framework :: napari",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Image Processing",
+]
+dependencies = [
+  "he-dapi>=0.1.0",
+  "napari>=0.4.18",
+  "magicgui>=0.7",
+  "qtpy>=2.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/urbiologicalpa/he-dapi-translator"
+Repository = "https://github.com/urbiologicalpa/he-dapi-translator"
+"Bug Tracker" = "https://github.com/urbiologicalpa/he-dapi-translator/issues"
+
+# napari plugin discovery (npe2)
+[project.entry-points."napari.manifest"]
+napari-he-dapi = "napari_he_dapi:napari.yaml"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/napari_he_dapi"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/napari_he_dapi", "README.md"]

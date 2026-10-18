@@ -22,6 +22,18 @@ Try the trained model **in your browser** — no install, inference runs client-
 - **Weights (model card):** https://huggingface.co/urbiologicalpa/he-dapi-translator
 - **Container:** `ghcr.io/urbiologicalpa/he-dapi-translator:latest` (also `:v0.1.0`)
 
+## 📦 Install / Python API
+
+```bash
+pip install he-dapi            # inference library + CLI
+pip install napari-he-dapi     # napari plugin (in-viewer translation)
+he-dapi translate -i he.png -o dapi.png -d he2dapi
+```
+```python
+from he_dapi import translate
+pred = translate("he.png", direction="he2dapi")   # -> uint8 HxW numpy array
+```
+
 ## 🔨 Build progress (live training — 181/200 epochs)
 
 | Metric | Value | Detail |
