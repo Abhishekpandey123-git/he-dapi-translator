@@ -7,15 +7,15 @@
 - Verify guards: `PYTHONPATH=. .venv/bin/python tests/test_resource_guards.py` (11 passed 2026-09-19)
 - Tracker JSON: `docs/progress.json` (machine-readable, auto-updated by `src/utils/progress_tracker.py:1`)
 
-## Overall Progress: 45% (Phase 1 done, Phase 2 local 168/200 RUNNING WEEK-MODE + Kaggle OFF)
+## Overall Progress: 45% (Phase 1 done, Phase 2 local 180/200 90% RUNNING WEEK-MODE + Kaggle OFF)
 
-> **Single truth (2026-10-17 05:00 UTC)**: machine-readable `docs/progress.json:runs` + this section + `MEMORY.md` banner are kept in sync. Tracker 45% (Phase 2 at 84%). Local checkpoint files are ground truth for epoch count. Token lives ONLY at `~/.kaggle/api_token` (chmod 600), never in repo.
+> **Single truth (2026-10-18 10:02 UTC)**: machine-readable `docs/progress.json:runs` + this section + `MEMORY.md` banner are kept in sync. Tracker 45% (Phase 2 at 90%). Local checkpoint files are ground truth for epoch count. Token lives ONLY at `~/.kaggle/api_token` (chmod 600), never in repo.
 
 ## Live Runs (canonical — update here + `progress.json:runs` + `MEMORY.md` together)
 
 | Run | Status | Detail |
 |-----|--------|--------|
-| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID1081` epoch173/200 (`172/200 86%`, **best ep169 1.5302 NEW BEST-EVER**; 170 1.5849 / 171 1.5957 / 172 1.5909 sideways) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep steady. Watch1096 + keepalive1099 300s. RAM 58%. No loss since 05:00 reboot (guard holding). 28 left → finish ~Oct-20. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
+| Local CPU | 🟢 RUNNING WEEK-MODE (1-week plan) | `PID1081` epoch181/200 (`180/200 90%`, **best ep169 1.5302 NEW BEST-EVER**; 178 1.5878 / 179 1.5906 / 180 1.5869 sideways-easing) `nice10 -u -m --resume auto --optimize-for lowram`, ~2.4h/ep steady. Watch1096 + keepalive1099 300s. RAM 58%, uptime 1d5h stable. No loss since 05:00 reboot. 20 left → finish ~Oct-20. Unpaired CycleGAN 200 kept in plan, decide at ep200. |
 | Kaggle | ⬜ CANCELLED, STAND DOWN | stays OFF until GPU quota refreshes |
 | Epoch ground truth | 168/200 done (84%) | `checkpoint_epoch168.pt` + `checkpoint_last.pt` Oct-17 03:19 (internal epoch 167); loss 1.5934. Reboot 04:52 killed `PID952` mid-epoch169 (~0.6h redone). |
 | ⚠️ Gap (kept) | No validation runs | `val_every: 5` unused in `train_paired.py` — loss-only; SSIM/PSNR/Dice Phase 4 TODO |

@@ -380,12 +380,16 @@
     {
       "date": "2026-10-17",
       "note": "16:40 UTC post-reboot +4: ckpt169 1.5302 NEW BEST-EVER (beats ep163 1.5685 by -0.038, biggest drop in ~30ep) / 170 1.5849 bounce / 171 1.5957 / 172 1.5909 sideways (pre-drop pattern as after ep140/153/163). Epoch173 step1640 (~88%) RUNNING PID1081 11.6h, pace steady ~2.4h/ep, RAM 58%, reboot-guard holding (no loss since 05:00). 28 left -> finish ~Oct-20."
+    },
+    {
+      "date": "2026-10-18",
+      "note": "10:02 UTC 90% MILESTONE: ckpt178 1.5878 / 179 1.5906 / 180 1.5869 DONE (180/200 90%, sideways band 1.587-1.591 slowly easing; D 0.7487 healthy). Epoch181 step540 (~29%) RUNNING PID1081 1d5h stable uptime (no reboot), pace ~2.4h/ep, RAM 58%. 20 left -> finish ~Oct-20. Unpaired CycleGAN decision at ep200."
     }
   ],
   "next_actions": [
-    "WEEK-MODE running: train1081 epoch173 (172/200 86%, best ep169 1.5302) + watch1096 + keepalive1099. Reboot-proof via cron @reboot + */5 logs/boot_launch.sh.",
+    "WEEK-MODE running: train1081 epoch181 (180/200 90%, best ep169 1.5302) + watch1096 + keepalive1099. Reboot-proof via cron @reboot + */5 logs/boot_launch.sh.",
     "kaggle STAND DOWN",
-    "28 remaining: ~67h at 2.4h/ep (finish ~Oct-20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
+    "20 remaining: ~48h at 2.4h/ep (finish ~Oct-20). Unpaired CycleGAN 200 kept in plan, decide at ep200."
   ],
   "runs": {
     "local": {
@@ -394,11 +398,11 @@
       "command": "nice -n 10 env PYTHONPATH=. .venv/bin/python -u -m src.models.train_paired --config configs/hemit_dual_branch.yaml --resume auto --optimize-for lowram",
       "log": "logs/train_paired.log",
       "resume_from": "resources/models/checkpoints/he2dapi/checkpoint_epoch168.pt (epoch168 done)",
-      "current_epoch": 173,
+      "current_epoch": 181,
       "total_epochs": 200,
       "started": "2026-10-17T05:00:31Z",
       "supervisor": "logs/boot_launch.sh (cron @reboot + */5) -> logs/keepalive_week.sh (300s) -> train + watch",
-      "note": "2026-10-17 16:40 UTC: 172/200 (86%) done, best ep169 1.5302 NEW BEST-EVER; ep170-172 sideways 1.585-1.596. Epoch173 step1640 (~88%) RUNNING PID1081, watch1096 + keepalive1099, RAM 58%. No loss since reboot (guard holding). 28 left -> finish ~Oct-20."
+      "note": "2026-10-18 10:02 UTC: 180/200 (90%) done, best ep169 1.5302 NEW BEST-EVER; ep178-180 sideways 1.587-1.591 slowly easing. Epoch181 step540 (~29%) RUNNING PID1081 1d5h, watch1096 + keepalive1099, RAM 58%. No reboot/loss since 05:00. 20 left -> finish ~Oct-20."
     },
     "kaggle": {
       "status": "CANCELLED_STAND_DOWN",
@@ -426,5 +430,5 @@
   },
   "tracker_version": "1.0",
   "generated": "2026-10-13T07:00:53.588015Z",
-  "last_verified": "2026-10-17T16:40Z"
+  "last_verified": "2026-10-18T10:02Z"
 }
