@@ -1,20 +1,20 @@
-# H&E â†” DAPI Virtual Staining Translator
+# H&E ↔ DAPI Virtual Staining Translator
 
-Bi-directional virtual staining for histopathology: **H&E (RGB) â†” DAPI (grayscale)**, for single patches and whole-slide images (WSI). Paired Pix2Pix + unpaired CycleGAN, FastAPI backend, drag-and-drop frontend, Docker deploy.
+Bi-directional virtual staining for histopathology: **H&E (RGB) ↔ DAPI (grayscale)**, for single patches and whole-slide images (WSI). Paired Pix2Pix + unpaired CycleGAN, FastAPI backend, drag-and-drop frontend, Docker deploy.
 
 ![stack](https://img.shields.io/badge/PyTorch-2.14%20CPU-orange) [![guards](https://github.com/urbiologicalpa/he-dapi-translator/actions/workflows/ci.yml/badge.svg)](https://github.com/urbiologicalpa/he-dapi-translator/actions) [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE) [![python](https://img.shields.io/badge/python-3.10%2B-blue)](pyproject.toml) [![PyPI](https://img.shields.io/pypi/v/he-dapi?label=pip%20install%20he-dapi)](https://pypi.org/project/he-dapi/) [![napari plugin](https://img.shields.io/badge/napari-he--dapi-blueviolet)](https://pypi.org/project/napari-he-dapi/) ![trained on](https://img.shields.io/badge/trained%20on-3.7GB%20CPU-critical) ![building](https://img.shields.io/badge/status-actively%20building-orange) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)](CONTRIBUTING.md)
 
-> ðŸš§ **Actively building in public** â€” model training live (**181/200 epochs**, 90.5%), roadmap in [Issues](https://github.com/urbiologicalpa/he-dapi-translator/issues), milestones as [Releases](https://github.com/urbiologicalpa/he-dapi-translator/releases). Contributors welcome â€” start with [CONTRIBUTING.md](CONTRIBUTING.md).
+> 🚧 **Actively building in public** — model training live (**181/200 epochs**, 90.5%), roadmap in [Issues](https://github.com/urbiologicalpa/he-dapi-translator/issues), milestones as [Releases](https://github.com/urbiologicalpa/he-dapi-translator/releases). Contributors welcome — start with [CONTRIBUTING.md](CONTRIBUTING.md).
 
-> **Why this repo stands out:** the product-grade model (3,717 images, 512px, ngf64/9-block generator, 200 epochs) is being trained **on a 3.7GB RAM, CPU-only laptop** â€” via streaming-by-default engineering (10.6GB â†’ 140MB pack peak, 4.8GB â†’ 512MB WSI budget) with crash-resume safety across reboots. See [the constraint story](#engineering-under-constraints).
+> **Why this repo stands out:** the product-grade model (3,717 images, 512px, ngf64/9-block generator, 200 epochs) is being trained **on a 3.7GB RAM, CPU-only laptop** — via streaming-by-default engineering (10.6GB → 140MB pack peak, 4.8GB → 512MB WSI budget) with crash-resume safety across reboots. See [the constraint story](#engineering-under-constraints).
 
 | H&E input | DAPI target |
 |---|---|
 | ![H&E](data/examples/he_example.png) | ![DAPI](data/examples/dapi_example.png) |
 
-## ðŸ”¬ Live demo
+## 🔬 Live demo
 
-Try the trained model **in your browser** â€” no install, inference runs client-side via ONNX Runtime Web:
+Try the trained model **in your browser** — no install, inference runs client-side via ONNX Runtime Web:
 
 [![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Live%20Space-blue)](https://huggingface.co/spaces/urbiologicalpa/he-dapi-translator) [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Weights-yellow)](https://huggingface.co/urbiologicalpa/he-dapi-translator)
 
@@ -22,9 +22,9 @@ Try the trained model **in your browser** â€” no install, inference runs cl
 - **Weights (model card):** https://huggingface.co/urbiologicalpa/he-dapi-translator
 - **Container:** `ghcr.io/urbiologicalpa/he-dapi-translator:latest` (also `:v0.1.0`)
 
-## ðŸ“¦ Install / Python API
+## 📦 Install / Python API
 
-> âš ï¸ **Alpha / building:** the pip packages ship the `he2dapi` direction only;
+> ⚠️ **Alpha / building:** the pip packages ship the `he2dapi` direction only;
 > `dapi2he` lands with the unpaired model. APIs may change. Not for clinical use.
 
 ```bash
@@ -37,23 +37,23 @@ from he_dapi import translate
 pred = translate("he.png", direction="he2dapi")   # -> uint8 HxW numpy array
 ```
 
-## ðŸ”¨ Build progress (live training â€” 181/200 epochs)
+## 🔨 Build progress (live training — 181/200 epochs)
 
 | Metric | Value | Detail |
 |---|---|---|
 | Progress | **181/200 epochs (90.5%)** | resumable, per-epoch atomic checkpoints |
-| G-loss | **2.2603 â†’ 1.5302 (âˆ’32%)**, still falling | best-ep169, no divergence |
+| G-loss | **2.2603 → 1.5302 (−32%)**, still falling | best-ep169, no divergence |
 | D-loss | **~0.75 stable** | balanced GAN, no collapse/mode-collapse |
 | Val PSNR | **29.3 dB** (peak 29.8) | offline eval, N=30 val |
-| Nuclei Dice | 0.03 â†’ 0.11 (late gain, still climbing) | StarDist pseudo-labels, thresh 0.1 |
-| Pace | ~2.4h/epoch CPU | ETA full 200 â‰ˆ Oct-20 |
+| Nuclei Dice | 0.03 → 0.11 (late gain, still climbing) | StarDist pseudo-labels, thresh 0.1 |
+| Pace | ~2.4h/epoch CPU | ETA full 200 ≈ Oct-20 |
 
-Full history: [`docs/TRACKER.md`](docs/TRACKER.md) (human log) + [`docs/progress.json`](docs/progress.json) (machine-readable) â€” kept in sync after every milestone.
+Full history: [`docs/TRACKER.md`](docs/TRACKER.md) (human log) + [`docs/progress.json`](docs/progress.json) (machine-readable) — kept in sync after every milestone.
 
 ## Architecture
 
-- **H&Eâ†’DAPI (paired):** dual-branch Pix2Pix (CNN-ResNet + Swin-Transformer + FMF fusion) + PatchGAN, loss = GAN + 100Ã—L1 + SSIM + nuclei-Dice aux
-- **DAPIâ†’H&E (unpaired):** CycleGAN fallback for unaligned sections
+- **H&E→DAPI (paired):** dual-branch Pix2Pix (CNN-ResNet + Swin-Transformer + FMF fusion) + PatchGAN, loss = GAN + 100×L1 + SSIM + nuclei-Dice aux
+- **DAPI→H&E (unpaired):** CycleGAN fallback for unaligned sections
 - **Data:** HEMIT 5,292 pairs (3717 train / 630 val / 945 test, 512px) + MHIST/BCI for unpaired
 - **Inference:** per-tile streaming WSI translation (no full-slide canvas), ONNX export
 
@@ -65,11 +65,11 @@ Every stage profiled with `src/utils/resource_monitor.py`, every spike fixed by 
 |---|---|
 | H5 pack 10.6GB concat OOM | chunked copy B=100, peak 140MB |
 | WSI canvas 4.8GB | memmap `merge_tiles_streaming`, 512MB budget |
-| VGG DISTS 400MB on CPU | disabled â†’ L1+SSIM fallback |
-| 8 workers Ã— RAM duplication | `num_workers 0`, batch 2 + grad-accum 4 (eff. 8) |
+| VGG DISTS 400MB on CPU | disabled → L1+SSIM fallback |
+| 8 workers × RAM duplication | `num_workers 0`, batch 2 + grad-accum 4 (eff. 8) |
 | Reboots killing days of work | atomic `checkpoint_last.pt` + `--resume auto` + cron `boot_launch.sh` supervisor |
 
-A Kaggle T4 offload was attempted, measured (CPU-only quota, 2.8h/ep â€” *slower* than local), and stood down with a written post-mortem instead of sunk cost. Process notes: [`wiki/`](wiki/) (9 optimization tracks), [`docs/optimization/REPORT.md`](docs/optimization/REPORT.md).
+A Kaggle T4 offload was attempted, measured (CPU-only quota, 2.8h/ep — *slower* than local), and stood down with a written post-mortem instead of sunk cost. Process notes: [`wiki/`](wiki/) (9 optimization tracks), [`docs/optimization/REPORT.md`](docs/optimization/REPORT.md).
 
 ## Quickstart
 
@@ -97,8 +97,7 @@ source .venv/bin/activate
 
 ```bash
 python -m pip install --upgrade pip
-python -m pip install -r docker/requirements.txt --index-url https://download.pytorch.org/whl/cpu
-> **Warning:** Use the CPU-only PyTorch index as the primary package index. Avoid running a second `pip install -r docker/requirements.txt` afterward, because it could re-resolve PyTorch dependencies through PyPI.
+python -m pip install -r docker/requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
 ```
 
 3. Verify the installation.
@@ -121,10 +120,10 @@ docker build -t he-dapi-translator -f docker/Dockerfile .
 Alternatively, use the provided Compose configuration:
 
 ```bash
-docker compose up --build
+docker compose -f docker/docker-compose.yml up --build
 ```
 
-Use `docker compose down` to stop the Compose services.
+Use `docker compose -f docker/docker-compose.yml down` to stop the Compose services.
 
 ### Training, tracking, and regression checks
 
@@ -168,4 +167,4 @@ tests/          resource-guard regression tests (mirrored in CI)
 
 ## Author
 
-**Bikash Kumar** â€” [@urbiologicalpa](https://github.com/urbiologicalpa) Â· [urbiologicalpaa](https://github.com/urbiologicalpaa) Â· Python/R/SQL, biotech Ã— data. Open to collaboration and roles in ML / computational biology.
+**Bikash Kumar** — [@urbiologicalpa](https://github.com/urbiologicalpa) · [urbiologicalpaa](https://github.com/urbiologicalpaa) · Python/R/SQL, biotech × data. Open to collaboration and roles in ML / computational biology.
